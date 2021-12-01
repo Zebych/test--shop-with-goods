@@ -21,7 +21,7 @@ const slice = createSlice({
 export const goodsReducer = slice.reducer;
 
 // Actions
-const { goodsAll } = slice.actions;
+export const { goodsAll } = slice.actions;
 
 // Thunk
 export const goodsAllTC = (num: number) => (dispatch: Dispatch) => {

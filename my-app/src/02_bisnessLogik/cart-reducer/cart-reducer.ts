@@ -61,7 +61,7 @@ const slice = createSlice({
           // eslint-disable-next-line no-param-reassign
           p.toPurchase += 1;
         }
-        return state;
+        return p;
       });
       saveAddedCartToLocalStorage(state.addedCart);
     },
