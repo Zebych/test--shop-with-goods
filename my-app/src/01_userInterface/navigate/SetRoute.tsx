@@ -2,8 +2,7 @@ import React, { memo, ReactElement } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { Goods } from '../components/goods/Goods';
-import { CartContainer } from '../components/purchases/CartContainer';
+import { Goods, CartContainer } from '../components';
 
 export const SetRoute = memo(
   (): ReactElement => (

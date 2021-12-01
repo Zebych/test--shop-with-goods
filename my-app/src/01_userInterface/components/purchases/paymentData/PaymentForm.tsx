@@ -11,30 +11,8 @@ import {
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { buyTC } from '02_bisnessLogik/cart-reducer';
-import { AppRootStateType } from '02_bisnessLogik/store';
-import { ProductObjType } from '03_inquiries/server';
-
-export type FormikErrorType = {
-  country?: string;
-  town?: string;
-  city?: string;
-  house?: string;
-
-  apartment?: string;
-  index?: string;
-  surname?: string;
-  name?: string;
-
-  firstLastName?: string;
-  cardNumber?: string;
-  expirationDate?: string;
-  password?: string;
-  rememberMe?: boolean;
-};
-type PaymentFormPropsType = {
-  mediaStyle?: object;
-};
+import { AppRootStateType, buyTC } from '02_bisnessLogik';
+import { ProductObjType } from '03_inquiries';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useDispatch();
@@ -225,3 +203,25 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
     </FormControl>
   );
 });
+
+// Types
+export type FormikErrorType = {
+  country?: string;
+  town?: string;
+  city?: string;
+  house?: string;
+
+  apartment?: string;
+  index?: string;
+  surname?: string;
+  name?: string;
+
+  firstLastName?: string;
+  cardNumber?: string;
+  expirationDate?: string;
+  password?: string;
+  rememberMe?: boolean;
+};
+type PaymentFormPropsType = {
+  mediaStyle?: object;
+};

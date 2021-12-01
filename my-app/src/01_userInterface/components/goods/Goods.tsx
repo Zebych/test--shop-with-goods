@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { Product } from './product';
 
-import { AppRootStateType } from '02_bisnessLogik/store';
-import { ProductObjType } from '03_inquiries/server';
+import { AppRootStateType } from '02_bisnessLogik';
+import { ProductObjType } from '03_inquiries';
 import styleContainer from '05_common/styles/Container.module.css';
 
 export const Goods = memo((): ReactElement => {

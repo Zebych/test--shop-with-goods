@@ -3,13 +3,11 @@ import React, { memo, useEffect } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
-import { setCart } from './02_bisnessLogik/cart-reducer';
-import { goodsAllTC } from './02_bisnessLogik/goods-reducer';
-import { ProductObjType } from './03_inquiries/server';
-import { getLocalData } from './06_utils/localStorage';
+import { ProductObjType } from './03_inquiries';
+import { getLocalData } from './06_utils';
 
-import { SetRoute } from '01_userInterface/01.2_navigate/SetRoute';
-import { Header } from '01_userInterface/components/C1_header/Header';
+import { Header, SetRoute } from '01_userInterface';
+import { goodsAllTC, setCart } from '02_bisnessLogik';
 
 const commandForGettingData = 1;
 

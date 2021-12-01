@@ -1,4 +1,4 @@
-import { ProductObjType } from '03_inquiries/server';
+import { ProductObjType } from '03_inquiries';
 
 // запрос данных состояния localStorage
 export const getLocalData = (): any => {

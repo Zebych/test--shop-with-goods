@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 
-import { totalPrice } from './cart-reducer';
-
-import { ProductObjType, ResDatatype, serverAPI } from '03_inquiries/server';
+import { totalPrice } from '02_bisnessLogik';
+import { ProductObjType, ResDatatype, serverAPI } from '03_inquiries';
 
 const initGoodsState: ResDatatype = {
   result: '',

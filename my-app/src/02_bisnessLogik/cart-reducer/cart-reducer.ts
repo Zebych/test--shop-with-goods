@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 
-import { FormikErrorType } from '01_userInterface/components/purchases/paymentData/PaymentForm';
-import { ProductObjType, serverAPI } from '03_inquiries/server';
-import { saveAddedCartToLocalStorage } from '06_utils/localStorage';
+import { FormikErrorType } from '01_userInterface';
+import { ProductObjType, serverAPI } from '03_inquiries';
+import { saveAddedCartToLocalStorage } from '06_utils';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
   addedCart: [],
   conditionBuy: false,
 };
+
 const slice = createSlice({
   name: 'cart',
   initialState: initCartState,

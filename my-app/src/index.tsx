@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { store } from './02_bisnessLogik/store';
+import { store } from './02_bisnessLogik';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 

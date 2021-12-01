@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Cart } from './Cart';
 
-import { setBuy } from '02_bisnessLogik/cart-reducer';
-import { AppRootStateType } from '02_bisnessLogik/store';
+import { setBuy, AppRootStateType } from '02_bisnessLogik';
 
 export const CartContainer = memo((): ReactElement => {
   const conditionBuy = useSelector<AppRootStateType, boolean>(

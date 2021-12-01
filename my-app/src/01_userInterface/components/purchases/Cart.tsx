@@ -1,13 +1,9 @@
 import React, { FC, memo, ReactElement } from 'react';
 
-import { PaymentForm } from './paymentData/PaymentForm';
-import { ProductsListContainer } from './productsList/ProductsListContainer';
+import { PaymentForm } from './paymentData';
+import { ProductsListContainer } from './productsList';
 
 import styleContainer from '05_common/styles/Container.module.css';
-
-type CartPropsType = {
-  mediaStyle?: object;
-};
 
 export const Cart: FC<CartPropsType> = memo(
   ({ mediaStyle }): ReactElement => (
@@ -21,3 +17,8 @@ export const Cart: FC<CartPropsType> = memo(
     </div>
   ),
 );
+
+// Types
+type CartPropsType = {
+  mediaStyle?: object;
+};

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { AppRootStateType } from '02_bisnessLogik/store';
+import { AppRootStateType } from '02_bisnessLogik';
 import cartIcon from '04_assets/img/outline_shopping_cart_white_18dp.png';
 
 export const Header = memo((): ReactElement => {

@@ -4,19 +4,13 @@ import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  AppRootStateType,
   addInCartTC,
   addProductInCart,
   totalPrice,
-} from '../../../../02_bisnessLogik/cart-reducer';
-import { AppRootStateType } from '../../../../02_bisnessLogik/store';
-import { ProductObjType } from '../../../../03_inquiries/server';
+} from '02_bisnessLogik';
+import { ProductObjType } from '03_inquiries';
 
-export type ProductPropsType = {
-  id: number;
-  name: string;
-  photo: string;
-  price: number;
-};
 export const Product: FC<ProductPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
     const addedCartArr = useSelector<AppRootStateType, Array<ProductObjType>>(
@@ -44,9 +38,17 @@ export const Product: FC<ProductPropsType> = memo(
         <p>{name}</p>
         <h3>{price}</h3>
         <Button variant="contained" color="primary" onClick={addInCart}>
-          Купить
+          buy
         </Button>
       </div>
     );
   },
 );
+
+// Types
+export type ProductPropsType = {
+  id: number;
+  name: string;
+  photo: string;
+  price: number;
+};

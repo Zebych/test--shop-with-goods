@@ -2,16 +2,16 @@ import React, { memo, ReactElement, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ProductsList } from './ProductsLists';
+import { ProductsList } from './ProductsList';
 
 import {
   addProductInCart,
   deleteCart,
   subtractCart,
   totalPrice,
-} from '02_bisnessLogik/cart-reducer';
-import { AppRootStateType } from '02_bisnessLogik/store';
-import { ProductObjType } from '03_inquiries/server';
+  AppRootStateType,
+} from '02_bisnessLogik';
+import { ProductObjType } from '03_inquiries';
 
 export const ProductsListContainer = memo((): ReactElement => {
   const productInCart = useSelector<AppRootStateType, Array<ProductObjType>>(
