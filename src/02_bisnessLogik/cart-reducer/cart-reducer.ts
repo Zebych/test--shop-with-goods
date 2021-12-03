@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Dispatch } from 'redux';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { FormikErrorType } from '01_userInterface';
 import { ProductObjType, serverAPI } from '03_inquiries';
@@ -75,6 +74,14 @@ const slice = createSlice({
       saveAddedCartToLocalStorage(state.addedCart);
     },
   },
+  /*  extraReducers: builder => {
+    builder.addCase(addInCartTC.fulfilled, (state, action) => {
+      // const apAddProduct = action.payload.addProduct;
+      // eslint-disable-next-line no-param-reassign
+      state.addedCart = [...state.addedCart,action.payload.addProduct];
+      saveAddedCartToLocalStorage(state.addedCart);
+    });
+  }, */
 });
 export const cartReducer = slice.reducer;
 
@@ -89,21 +96,22 @@ export const {
   cartClear,
 } = slice.actions;
 
-// Thunk
-export const addInCartTC = (id: number) => (dispatch: Dispatch) => {
+export const addInCartTC = createAsyncThunk('cart/addInCart', (id: number, thunkAPI) =>
   serverAPI.getCart(id).then((res: any) => {
-    dispatch(setCart({ addProduct: res }));
-    dispatch(totalPrice());
-  });
-};
-export const buyTC =
-  (addedCart: Array<ProductObjType>, values: FormikErrorType) => (dispatch: Dispatch) => {
-    serverAPI.postPurchases(addedCart, values).then((res: any) => {
-      dispatch(setBuy(res));
-      dispatch(cartClear());
-      dispatch(totalPrice());
+    thunkAPI.dispatch(totalPrice());
+    thunkAPI.dispatch(setCart({ addProduct: res }));
+  }),
+);
+export const buyTC = createAsyncThunk(
+  'cart/buy',
+  (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }, thunkAPI) => {
+    serverAPI.postPurchases(param.addedCart, param.values).then((res: any) => {
+      thunkAPI.dispatch(setBuy(res));
+      thunkAPI.dispatch(cartClear());
+      thunkAPI.dispatch(totalPrice());
     });
-  };
+  },
+);
 
 // Types
 export type InitCartType = {

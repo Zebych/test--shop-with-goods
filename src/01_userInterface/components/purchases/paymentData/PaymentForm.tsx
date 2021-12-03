@@ -71,7 +71,7 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
       return errors;
     },
     onSubmit: values => {
-      dispatch(buyTC(addedCart, values));
+      dispatch(buyTC({ addedCart, values }));
       formik.resetForm();
     },
   });
