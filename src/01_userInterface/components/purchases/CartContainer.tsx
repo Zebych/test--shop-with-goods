@@ -3,12 +3,14 @@ import React, { memo, ReactElement, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { conditionBuy } from '../../../02_bisnessLogik/cart-reducer/cart-reducer';
+
 import { Cart } from './Cart';
 
-import { setBuy, AppRootStateType } from '02_bisnessLogik';
+import { AppRootStateType } from '02_bisnessLogik';
 
 export const CartContainer = memo((): ReactElement => {
-  const conditionBuy = useSelector<AppRootStateType, boolean>(
+  const conditionBuyData = useSelector<AppRootStateType, boolean>(
     state => state.cart.conditionBuy,
   );
   const dispatch = useDispatch();
@@ -24,14 +26,12 @@ export const CartContainer = memo((): ReactElement => {
 
   // conditionBuy
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(setBuy({ result: false }));
-    }, 3000);
-  }, [conditionBuy]);
+    dispatch(conditionBuy({ result: false }));
+  }, [conditionBuyData]);
 
   // navigate
-  if (conditionBuy) {
-    navigate('/', { replace: true });
+  if (conditionBuyData) {
+    navigate('/test--shop-with-goods', { replace: true });
   }
   return (
     <div>

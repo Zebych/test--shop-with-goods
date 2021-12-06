@@ -3,12 +3,7 @@ import React, { FC, memo, ReactElement } from 'react';
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  AppRootStateType,
-  addInCartTC,
-  addProductInCart,
-  totalPrice,
-} from '02_bisnessLogik';
+import { AppRootStateType, addInCartTC, addProductInCart } from '02_bisnessLogik';
 import { ProductObjType } from '03_inquiries';
 
 export const Product: FC<ProductPropsType> = memo(
@@ -22,7 +17,6 @@ export const Product: FC<ProductPropsType> = memo(
     const addInCart = (): void => {
       if (addedCartArr.some(a => a.id === id)) {
         dispatch(addProductInCart({ id }));
-        dispatch(totalPrice());
       } else {
         dispatch(addInCartTC(id));
       }

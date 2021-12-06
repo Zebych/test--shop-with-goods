@@ -23,16 +23,6 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   // formik
   const formik = useFormik({
     initialValues: {
-      country: '',
-      town: '',
-      city: '',
-      house: '',
-
-      apartment: '',
-      index: '',
-      surname: '',
-      name: '',
-
       firstLastName: '',
       cardNumber: '',
       expirationDate: '',
@@ -79,69 +69,6 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   return (
     <FormControl style={{ paddingLeft: '50px' }}>
       <form onSubmit={formik.handleSubmit} style={mediaStyle}>
-        <FormGroup>
-          <TextField
-            variant="outlined"
-            label="Country"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('country')}
-          />
-          <TextField
-            variant="outlined"
-            label="Town"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('town')}
-          />
-          <TextField
-            variant="outlined"
-            label="City"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('city')}
-          />
-          <TextField
-            variant="outlined"
-            label="House"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('house')}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <TextField
-            variant="outlined"
-            label="Apartment"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('apartment')}
-          />
-          <TextField
-            variant="outlined"
-            type="tel"
-            label="index"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('index')}
-          />
-          <TextField
-            variant="outlined"
-            label="Surname"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('surname')}
-          />
-          <TextField
-            variant="outlined"
-            label="Name"
-            margin="normal"
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...formik.getFieldProps('name')}
-          />
-        </FormGroup>
-
         <FormGroup>
           <TextField
             variant="outlined"
@@ -206,16 +133,6 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
 
 // Types
 export type FormikErrorType = {
-  country?: string;
-  town?: string;
-  city?: string;
-  house?: string;
-
-  apartment?: string;
-  index?: string;
-  surname?: string;
-  name?: string;
-
   firstLastName?: string;
   cardNumber?: string;
   expirationDate?: string;

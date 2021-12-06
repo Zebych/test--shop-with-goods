@@ -1,10 +1,11 @@
+import photo5 from '../../04_assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
+
 import {
   addProductInCart,
-  cartClear,
+  buyTC,
   cartReducer,
   deleteCart,
   InitCartType,
-  setBuy,
   setCart,
   subtractCart,
   totalPrice,
@@ -73,17 +74,23 @@ test('add quantity from shopping list', () => {
 });
 
 test('make a purchase', () => {
-  const action = setBuy({ result: true });
+  const addedCart = [
+    { name: 'mug5', photo: photo5, id: 5, price: 110, toPurchase: 1, inStock: 10 },
+  ];
+  const values = {
+    firstLastName: 'Ivan·Ivanov',
+    cardNumber: '0000 0000 0000 0000',
+    expirationDate: '01/22',
+    password: '111',
+    rememberMe: true,
+  };
+  const action = buyTC.fulfilled({ addedCart, values }, 'cart/buy', {
+    addedCart,
+    values,
+  });
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.conditionBuy).toEqual(true);
-});
-
-test('clear cart', () => {
-  const action = cartClear();
-
-  const endState = cartReducer(startState, action);
-
-  expect(endState.addedCart.length).toEqual(0);
+  expect(endState.addedCart.length).toBe(0);
+  expect(endState.sumPrice).toBe(0);
 });

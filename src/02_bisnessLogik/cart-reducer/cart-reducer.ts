@@ -10,6 +10,12 @@ const initCartState: InitCartType = {
   conditionBuy: false,
 };
 
+export const buyTC = createAsyncThunk(
+  'cart/buy',
+  async (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }) =>
+    serverAPI.postPurchases(param.addedCart, param.values),
+);
+
 const slice = createSlice({
   name: 'cart',
   initialState: initCartState,
@@ -18,6 +24,8 @@ const slice = createSlice({
       const apAddProduct = action.payload.addProduct;
       // eslint-disable-next-line no-param-reassign
       state.addedCart = [...state.addedCart, apAddProduct];
+      // eslint-disable-next-line no-param-reassign
+      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
       saveAddedCartToLocalStorage(state.addedCart);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
@@ -62,26 +70,26 @@ const slice = createSlice({
         }
         return p;
       });
+      // eslint-disable-next-line no-param-reassign
+      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
       saveAddedCartToLocalStorage(state.addedCart);
     },
-    setBuy(state, action: PayloadAction<{ result: boolean }>) {
+    conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
       // eslint-disable-next-line no-param-reassign
       state.conditionBuy = action.payload.result;
     },
-    cartClear(state) {
+  },
+  extraReducers: builder => {
+    builder.addCase(buyTC.fulfilled, (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.conditionBuy = action.payload.result;
       // eslint-disable-next-line no-param-reassign
       state.addedCart = [];
-      saveAddedCartToLocalStorage(state.addedCart);
-    },
-  },
-  /*  extraReducers: builder => {
-    builder.addCase(addInCartTC.fulfilled, (state, action) => {
-      // const apAddProduct = action.payload.addProduct;
       // eslint-disable-next-line no-param-reassign
-      state.addedCart = [...state.addedCart,action.payload.addProduct];
+      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
       saveAddedCartToLocalStorage(state.addedCart);
     });
-  }, */
+  },
 });
 export const cartReducer = slice.reducer;
 
@@ -92,24 +100,15 @@ export const {
   subtractCart,
   addProductInCart,
   deleteCart,
-  setBuy,
-  cartClear,
+  conditionBuy,
 } = slice.actions;
 
-export const addInCartTC = createAsyncThunk('cart/addInCart', (id: number, thunkAPI) =>
-  serverAPI.getCart(id).then((res: any) => {
-    thunkAPI.dispatch(totalPrice());
+// Thunk
+export const addInCartTC = createAsyncThunk(
+  'cart/addInCart',
+  async (id: number, thunkAPI) => {
+    const res = await serverAPI.getCart(id);
     thunkAPI.dispatch(setCart({ addProduct: res }));
-  }),
-);
-export const buyTC = createAsyncThunk(
-  'cart/buy',
-  (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }, thunkAPI) => {
-    serverAPI.postPurchases(param.addedCart, param.values).then((res: any) => {
-      thunkAPI.dispatch(setBuy(res));
-      thunkAPI.dispatch(cartClear());
-      thunkAPI.dispatch(totalPrice());
-    });
   },
 );
 

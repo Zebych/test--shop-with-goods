@@ -19,7 +19,7 @@ const arrData: Array<ProductObjType> = [
 const purchasesData = [];
 
 export const serverAPI = {
-  getGoodsAll(response: number) {
+  getGoodsAll(response: number): any {
     return new Promise(res => {
       setTimeout(() => {
         if (response === 1) {
@@ -29,22 +29,22 @@ export const serverAPI = {
           });
         }
         res({ result: 'error', data: [] });
-      }, 1000);
+      }, 0);
     });
   },
-  getCart(id: number) {
+  getCart(id: number): any {
     return new Promise(res => {
       setTimeout(() => {
         res(arrData.find(f => f.id === id));
       }, 0);
     });
   },
-  postPurchases(addedCart: Array<ProductObjType>, values: FormikErrorType) {
+  postPurchases(addedCart: Array<ProductObjType>, values: FormikErrorType): any {
     purchasesData.push(addedCart, values);
     return new Promise(res => {
       setTimeout(() => {
         res({ result: 'true' });
-      }, 1000);
+      }, 0);
     });
   },
 };

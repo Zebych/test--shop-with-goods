@@ -8,11 +8,13 @@ import { AppRootStateType } from '02_bisnessLogik';
 import cartIcon from '04_assets/img/outline_shopping_cart_white_18dp.png';
 
 export const Header = memo((): ReactElement => {
-  const totalPrice = useSelector<AppRootStateType, number>(state => state.cart.sumPrice);
+  const totalPriceCarts = useSelector<AppRootStateType, number>(
+    state => state.cart.sumPrice,
+  );
 
   return (
     <div>
-      <Link to="/" style={{ textDecoration: 'none' }}>
+      <Link to="/test--shop-with-goods" style={{ textDecoration: 'none' }}>
         <Button color="inherit">
           <p style={{ color: '#fff' }}>Goods</p>
         </Button>
@@ -20,7 +22,7 @@ export const Header = memo((): ReactElement => {
       <Link to="/cart" style={{ textDecoration: 'none' }}>
         <Button color="inherit">
           <img src={cartIcon} alt="cart" />
-          {totalPrice > 0 && <p style={{ color: '#fff' }}>{totalPrice}</p>}
+          {totalPriceCarts > 0 && <p style={{ color: '#fff' }}>{totalPriceCarts}</p>}
         </Button>
       </Link>
     </div>

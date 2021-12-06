@@ -7,7 +7,7 @@ import { Goods, CartContainer } from '../components';
 export const SetRoute = memo(
   (): ReactElement => (
     <Routes>
-      <Route path="/" element={<Goods />} />
+      <Route path="/test--shop-with-goods" element={<Goods />} />
       <Route path="/cart" element={<CartContainer />} />
     </Routes>
   ),
