@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/test--shop-with-goods/static/css/main.7bd334d7.chunk.css",
-    "main.js": "/test--shop-with-goods/static/js/main.6934df28.chunk.js",
-    "main.js.map": "/test--shop-with-goods/static/js/main.6934df28.chunk.js.map",
-    "runtime-main.js": "/test--shop-with-goods/static/js/runtime-main.39266833.js",
-    "runtime-main.js.map": "/test--shop-with-goods/static/js/runtime-main.39266833.js.map",
-    "static/js/2.47991ffe.chunk.js": "/test--shop-with-goods/static/js/2.47991ffe.chunk.js",
-    "static/js/2.47991ffe.chunk.js.map": "/test--shop-with-goods/static/js/2.47991ffe.chunk.js.map",
-    "static/js/3.f7195211.chunk.js": "/test--shop-with-goods/static/js/3.f7195211.chunk.js",
-    "static/js/3.f7195211.chunk.js.map": "/test--shop-with-goods/static/js/3.f7195211.chunk.js.map",
+    "main.js": "/test--shop-with-goods/static/js/main.ae2e8600.chunk.js",
+    "main.js.map": "/test--shop-with-goods/static/js/main.ae2e8600.chunk.js.map",
+    "runtime-main.js": "/test--shop-with-goods/static/js/runtime-main.b3e9d8b6.js",
+    "runtime-main.js.map": "/test--shop-with-goods/static/js/runtime-main.b3e9d8b6.js.map",
+    "static/js/2.3beae681.chunk.js": "/test--shop-with-goods/static/js/2.3beae681.chunk.js",
+    "static/js/2.3beae681.chunk.js.map": "/test--shop-with-goods/static/js/2.3beae681.chunk.js.map",
+    "static/js/3.7d0e9394.chunk.js": "/test--shop-with-goods/static/js/3.7d0e9394.chunk.js",
+    "static/js/3.7d0e9394.chunk.js.map": "/test--shop-with-goods/static/js/3.7d0e9394.chunk.js.map",
     "index.html": "/test--shop-with-goods/index.html",
     "static/css/main.7bd334d7.chunk.css.map": "/test--shop-with-goods/static/css/main.7bd334d7.chunk.css.map",
-    "static/js/2.47991ffe.chunk.js.LICENSE.txt": "/test--shop-with-goods/static/js/2.47991ffe.chunk.js.LICENSE.txt",
+    "static/js/2.3beae681.chunk.js.LICENSE.txt": "/test--shop-with-goods/static/js/2.3beae681.chunk.js.LICENSE.txt",
     "static/media/6-1000x1000.9c0a3947.jpg": "/test--shop-with-goods/static/media/6-1000x1000.9c0a3947.jpg",
     "static/media/6064641689.2e40e89d.jpg": "/test--shop-with-goods/static/media/6064641689.2e40e89d.jpg",
     "static/media/680395566_w640_h640_kruzhka-s-prikolom.6603be42.jpg": "/test--shop-with-goods/static/media/680395566_w640_h640_kruzhka-s-prikolom.6603be42.jpg",
@@ -21,9 +21,9 @@
     "static/media/product_57508_0_0_0.5fd91d27.jpg": "/test--shop-with-goods/static/media/product_57508_0_0_0.5fd91d27.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.39266833.js",
-    "static/js/2.47991ffe.chunk.js",
+    "static/js/runtime-main.b3e9d8b6.js",
+    "static/js/2.3beae681.chunk.js",
     "static/css/main.7bd334d7.chunk.css",
-    "static/js/main.6934df28.chunk.js"
+    "static/js/main.ae2e8600.chunk.js"
   ]
 }
