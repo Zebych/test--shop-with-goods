@@ -1,17 +1,19 @@
 import React, { FC, memo, ReactElement } from 'react';
 
 import { Button } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { AppRootStateType, addInCartTC, addProductInCart } from '02_bisnessLogik';
-import { ProductObjType } from '03_inquiries';
+import {
+  addInCartTC,
+  addProductInCart,
+  useAppDispatch,
+  useAppSelector,
+} from '02_bisnessLogik';
+import { arrAddedCart } from '05_common';
 
 export const Product: FC<ProductPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
-    const addedCartArr = useSelector<AppRootStateType, Array<ProductObjType>>(
-      state => state.cart.addedCart,
-    );
-    const dispatch = useDispatch();
+    const addedCartArr = useAppSelector(arrAddedCart);
+    const dispatch = useAppDispatch();
 
     // Проверка на наличие товара в массиве запланированных покупок
     const addInCart = (): void => {

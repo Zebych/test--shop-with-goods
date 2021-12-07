@@ -1,19 +1,16 @@
 import React, { memo, ReactElement, useEffect, useState } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { conditionBuy } from '../../../02_bisnessLogik/cart-reducer/cart-reducer';
 
 import { Cart } from './Cart';
 
-import { AppRootStateType } from '02_bisnessLogik';
+import { useAppDispatch, useAppSelector } from '02_bisnessLogik';
+import { conditionBuy } from '02_bisnessLogik/cart-reducer/cart-reducer';
+import { dataConditionBuy } from '05_common';
 
 export const CartContainer = memo((): ReactElement => {
-  const conditionBuyData = useSelector<AppRootStateType, boolean>(
-    state => state.cart.conditionBuy,
-  );
-  const dispatch = useDispatch();
+  const conditionBuyData = useAppSelector(dataConditionBuy);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   // media hook

@@ -1,16 +1,14 @@
 import React, { memo, ReactElement } from 'react';
 
 import { Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { AppRootStateType } from '02_bisnessLogik';
+import { useAppSelector } from '02_bisnessLogik';
 import cartIcon from '04_assets/img/outline_shopping_cart_white_18dp.png';
+import { totalPriceCarts } from '05_common';
 
 export const Header = memo((): ReactElement => {
-  const totalPriceCarts = useSelector<AppRootStateType, number>(
-    state => state.cart.sumPrice,
-  );
+  const totalPrise = useAppSelector(totalPriceCarts);
 
   return (
     <div>
@@ -22,7 +20,7 @@ export const Header = memo((): ReactElement => {
       <Link to="/cart" style={{ textDecoration: 'none' }}>
         <Button color="inherit">
           <img src={cartIcon} alt="cart" />
-          {totalPriceCarts > 0 && <p style={{ color: '#fff' }}>{totalPriceCarts}</p>}
+          {totalPrise > 0 && <p style={{ color: '#fff' }}>{totalPrise}</p>}
         </Button>
       </Link>
     </div>

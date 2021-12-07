@@ -9,16 +9,13 @@ import {
   TextField,
 } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { AppRootStateType, buyTC } from '02_bisnessLogik';
-import { ProductObjType } from '03_inquiries';
+import { buyTC, useAppDispatch, useAppSelector } from '02_bisnessLogik';
+import { arrAddedCart } from '05_common';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
-  const dispatch = useDispatch();
-  const addedCart = useSelector<AppRootStateType, Array<ProductObjType>>(
-    state => state.cart.addedCart,
-  );
+  const dispatch = useAppDispatch();
+  const addedCart = useAppSelector(arrAddedCart);
 
   // formik
   const formik = useFormik({

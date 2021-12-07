@@ -1,7 +1,5 @@
 import React, { memo, ReactElement, useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import { ProductsList } from './ProductsList';
 
 import {
@@ -9,19 +7,16 @@ import {
   deleteCart,
   subtractCart,
   totalPrice,
-  AppRootStateType,
+  useAppSelector,
+  useAppDispatch,
 } from '02_bisnessLogik';
-import { ProductObjType } from '03_inquiries';
+import { arrAddedCart, totalPriceCarts } from '05_common';
 
 export const ProductsListContainer = memo((): ReactElement => {
-  const productInCart = useSelector<AppRootStateType, Array<ProductObjType>>(
-    state => state.cart.addedCart,
-  );
-  const amountOfPurchases = useSelector<AppRootStateType, number>(
-    state => state.cart.sumPrice,
-  );
+  const productInCart = useAppSelector(arrAddedCart);
+  const amountOfPurchases = useAppSelector(totalPriceCarts);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(totalPrice());

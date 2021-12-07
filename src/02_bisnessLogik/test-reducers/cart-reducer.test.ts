@@ -1,5 +1,4 @@
 import photo5 from '../../04_assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
-
 import {
   addProductInCart,
   buyTC,
@@ -9,7 +8,7 @@ import {
   setCart,
   subtractCart,
   totalPrice,
-} from './cart-reducer';
+} from '../cart-reducer/cart-reducer';
 
 const startState: InitCartType = {
   sumPrice: 0,

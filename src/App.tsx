@@ -1,18 +1,17 @@
 import React, { memo, useEffect } from 'react';
 
 import { AppBar, Toolbar } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 
 import { ProductObjType } from './03_inquiries';
 import { getLocalData } from './06_utils';
 
 import { Header, SetRoute } from '01_userInterface';
-import { goodsAllTC, setCart } from '02_bisnessLogik';
+import { goodsAllTC, setCart, useAppDispatch } from '02_bisnessLogik';
 
 const commandForGettingData = 1;
 
 export const App = memo(() => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // обработка и добавление запланированых покупок из localStorage
   // данные для отрисовки стартовой страницы
