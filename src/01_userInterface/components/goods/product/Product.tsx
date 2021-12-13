@@ -3,7 +3,7 @@ import React, { FC, memo, ReactElement } from 'react';
 import { Button } from '@material-ui/core';
 
 import {
-  addInCartTC,
+  // addInCartTC,
   addProductInCart,
   setCart,
   useAppDispatch,
@@ -29,9 +29,9 @@ export const Product: FC<ProductPropsType> = memo(
         }
       }
     };
-    const addAxios = (): void => {
+    /*    const addAxios = (): void => {
       dispatch(addInCartTC());
-    };
+    }; */
 
     return (
       <div style={{ padding: '20px' }}>
@@ -45,9 +45,9 @@ export const Product: FC<ProductPropsType> = memo(
         <Button variant="contained" color="primary" onClick={addInCart}>
           buy
         </Button>
-        <Button variant="contained" color="primary" onClick={addAxios}>
+        {/*     <Button variant="contained" color="primary" onClick={addAxios}>
           api
-        </Button>
+        </Button> */}
       </div>
     );
   },

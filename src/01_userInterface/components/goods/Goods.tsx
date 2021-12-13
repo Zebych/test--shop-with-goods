@@ -8,8 +8,7 @@ import styleContainer from '05_common/styles/Container.module.css';
 
 export const Goods = memo((): ReactElement => {
   const goods = useAppSelector(goodsArrData);
-  // eslint-disable-next-line no-debugger
-  debugger;
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <div className={styleContainer.container}>
