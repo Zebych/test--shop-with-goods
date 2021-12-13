@@ -61,6 +61,11 @@ export type ProductObjType = {
 export type ResDatatype = {
   result: string;
   data: Array<ProductObjType>;
+  imgArr: Array<ImgObjType>;
+};
+export type ImgObjType = {
+  id: number;
+  photo: string;
 };
 export type dataType = {
   name: string;

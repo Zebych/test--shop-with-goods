@@ -8,3 +8,5 @@ export const goodsArrData = (state: AppRootStateType): Array<ProductObjType> =>
   state.goods.data;
 export const dataConditionBuy = (state: AppRootStateType): boolean =>
   state.cart.conditionBuy;
+export const initData = (state: AppRootStateType): Array<ProductObjType> =>
+  state.goods.data;

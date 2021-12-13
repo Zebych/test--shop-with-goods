@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { API } from '../../03_api';
+
 import { FormikErrorType } from '01_userInterface';
 import { ProductObjType, serverAPI } from '03_inquiries';
 import { saveAddedCartToLocalStorage } from '06_utils';
@@ -10,6 +12,7 @@ const initCartState: InitCartType = {
   conditionBuy: false,
 };
 
+// Thunk extraReducers
 export const buyTC = createAsyncThunk(
   'cart/buy',
   async (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }) =>
@@ -103,14 +106,19 @@ export const {
   conditionBuy,
 } = slice.actions;
 
-// Thunk
-export const addInCartTC = createAsyncThunk(
+// Thunk reducers
+/* export const addInCartTC = createAsyncThunk(
   'cart/addInCart',
   async (id: number, thunkAPI) => {
     const res = await serverAPI.getCart(id);
     thunkAPI.dispatch(setCart({ addProduct: res }));
   },
-);
+); */
+export const addInCartTC = createAsyncThunk('cart/addInCart', () => {
+  API.getGoodsAll().then((res: any) => res.data);
+  /* const res = await serverAPI.getCart(id);
+    thunkAPI.dispatch(setCart({ addProduct: res })); */
+});
 
 // Types
 export type InitCartType = {
