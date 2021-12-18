@@ -1,8 +1,8 @@
-import { AppRootStateType } from '02_bisnessLogik';
-import { ProductObjType } from '03_inquiries';
+import { ProductObjType } from 'api';
+import { AppRootStateType } from 'store/index';
 
 export const totalPriceCarts = (state: AppRootStateType): number => state.cart.sumPrice;
-export const arrAddedCart = (state: AppRootStateType): Array<ProductObjType> =>
+export const isInCart = (state: AppRootStateType): Array<ProductObjType> =>
   state.cart.addedCart;
 export const goodsArrData = (state: AppRootStateType): Array<ProductObjType> =>
   state.goods.data;

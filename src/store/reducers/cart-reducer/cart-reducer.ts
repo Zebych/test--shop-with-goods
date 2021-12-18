@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { FormikErrorType } from '01_userInterface';
-import { ProductObjType, serverAPI } from '03_inquiries';
-import { saveAddedCartToLocalStorage } from '06_utils';
+import { API, ProductObjType } from 'api';
+import { saveAddedCartToLocalStorage } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
@@ -14,7 +14,7 @@ const initCartState: InitCartType = {
 export const buyTC = createAsyncThunk(
   'cart/buy',
   async (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }) =>
-    serverAPI.postPurchases(param.addedCart, param.values),
+    API.postPurchases(param.addedCart, param.values),
 );
 
 const slice = createSlice({
@@ -83,7 +83,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
       // eslint-disable-next-line no-param-reassign
-      state.conditionBuy = action.payload.result;
+      state.conditionBuy = action.payload.data;
       // eslint-disable-next-line no-param-reassign
       state.addedCart = [];
       // eslint-disable-next-line no-param-reassign

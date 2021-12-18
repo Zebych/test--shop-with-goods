@@ -10,12 +10,11 @@ import {
 } from '@material-ui/core';
 import { useFormik } from 'formik';
 
-import { buyTC, useAppDispatch, useAppSelector } from '02_bisnessLogik';
-import { arrAddedCart } from '05_common';
+import { isInCart, buyTC, useAppDispatch, useAppSelector } from 'store';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useAppDispatch();
-  const addedCart = useAppSelector(arrAddedCart);
+  const addedCart = useAppSelector(isInCart);
 
   // formik
   const formik = useFormik({

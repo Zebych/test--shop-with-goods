@@ -2,8 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { cartReducer } from './cart-reducer/cart-reducer';
-import { goodsReducer } from './goods-reducer/goods-reducer';
+import { cartReducer } from './reducers/cart-reducer/cart-reducer';
+import { goodsReducer } from './reducers/goods-reducer/goods-reducer';
 
 const rootReducer = combineReducers({
   goods: goodsReducer,

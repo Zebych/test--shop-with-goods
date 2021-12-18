@@ -1,6 +1,6 @@
-import { ProductObjType } from '03_inquiries';
-
 // запрос данных состояния localStorage
+import { ProductObjType } from 'api';
+
 export const getLocalData = (): any => {
   try {
     const serializedState = localStorage.getItem('addedProduct');

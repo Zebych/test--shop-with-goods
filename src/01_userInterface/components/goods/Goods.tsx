@@ -1,10 +1,9 @@
 import React, { memo, ReactElement } from 'react';
 
-import { Product } from './product';
+import { ProductContainer } from './product';
 
-import { useAppSelector } from '02_bisnessLogik';
-import { goodsArrData } from '05_common';
 import styleContainer from '05_common/styles/Container.module.css';
+import { goodsArrData, useAppSelector } from 'store';
 
 export const Goods = memo((): ReactElement => {
   const goods = useAppSelector(goodsArrData);
@@ -12,8 +11,14 @@ export const Goods = memo((): ReactElement => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <div className={styleContainer.container}>
-        {goods.map(g => (
-          <Product photo={g.photo} name={g.name} id={g.id} price={g.price} key={g.id} />
+        {goods.map(product => (
+          <ProductContainer
+            photo={product.photo}
+            name={product.name}
+            id={product.id}
+            price={product.price}
+            key={product.id}
+          />
         ))}
       </div>
     </div>

@@ -12,34 +12,6 @@ export const API = {
   postPurchases(addedCart: Array<ProductObjType>, values: FormikErrorType) {
     return instance.post('/cart', { addedCart, values });
   },
-  /*  getGoodsAll(response: number): any {
-    return new Promise(res => {
-      setTimeout(() => {
-        if (response === 1) {
-          res({
-            result: 'success',
-            data: arrData,
-          });
-        }
-        res({ result: 'error', data: [] });
-      }, 0);
-    });
-  },
-  getCart(id: number): any {
-    return new Promise(res => {
-      setTimeout(() => {
-        res(arrData.find(f => f.id === id));
-      }, 0);
-    });
-  },
-  postPurchases(addedCart: Array<ProductObjType>, values: FormikErrorType): any {
-    purchasesData.push(addedCart, values);
-    return new Promise(res => {
-      setTimeout(() => {
-        res({ result: 'true' });
-      }, 0);
-    });
-  }, */
 };
 
 // Types
@@ -54,10 +26,15 @@ export type ProductObjType = {
 export type ResDatatype = {
   result: string;
   data: Array<ProductObjType>;
+  imgArr: Array<ImgObjType>;
 };
 export type dataType = {
   name: string;
   picture: string;
   id: number;
   price: number;
+};
+export type ImgObjType = {
+  id: number;
+  photo: string;
 };

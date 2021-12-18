@@ -2,11 +2,10 @@ import React, { memo, useEffect } from 'react';
 
 import { AppBar, Toolbar } from '@material-ui/core';
 
-import { ProductObjType } from './03_inquiries';
-import { getLocalData } from './06_utils';
-
 import { Header, SetRoute } from '01_userInterface';
-import { goodsAllTC, setCart, useAppDispatch } from '02_bisnessLogik';
+import { ProductObjType } from 'api';
+import { getLocalData } from 'localStorage';
+import { goodsAllTC, setCart, useAppDispatch } from 'store';
 
 const commandForGettingData = 1;
 

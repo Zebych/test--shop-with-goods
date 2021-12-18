@@ -9,11 +9,12 @@ import {
   totalPrice,
   useAppSelector,
   useAppDispatch,
-} from '02_bisnessLogik';
-import { arrAddedCart, totalPriceCarts } from '05_common';
+  isInCart,
+  totalPriceCarts,
+} from 'store';
 
 export const ProductsListContainer = memo((): ReactElement => {
-  const productInCart = useAppSelector(arrAddedCart);
+  const productInCart = useAppSelector(isInCart);
   const amountOfPurchases = useAppSelector(totalPriceCarts);
 
   const dispatch = useAppDispatch();

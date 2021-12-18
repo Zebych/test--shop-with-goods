@@ -1,4 +1,4 @@
-import photo5 from '../../04_assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
+import photo5 from '../../../04_assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
 import {
   addProductInCart,
   buyTC,

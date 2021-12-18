@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Cart } from './Cart';
 
-import { useAppDispatch, useAppSelector } from '02_bisnessLogik';
-import { conditionBuy } from '02_bisnessLogik/cart-reducer/cart-reducer';
-import { dataConditionBuy } from '05_common';
+import { dataConditionBuy, useAppDispatch, useAppSelector } from 'store';
+import { conditionBuy } from 'store/reducers/cart-reducer/cart-reducer';
 
 export const CartContainer = memo((): ReactElement => {
   const conditionBuyData = useAppSelector(dataConditionBuy);
