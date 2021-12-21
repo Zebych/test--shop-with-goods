@@ -1,11 +1,11 @@
-import React, { memo, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { ProductContainer } from './product';
 
-import styleContainer from '05_common/styles/Container.module.css';
 import { goodsArrData, useAppSelector } from 'store';
+import styleContainer from 'styles/Container.module.css';
 
-export const Goods = memo((): ReactElement => {
+export const Goods = (): ReactElement => {
   const goods = useAppSelector(goodsArrData);
 
   return (
@@ -23,4 +23,4 @@ export const Goods = memo((): ReactElement => {
       </div>
     </div>
   );
-});
+};

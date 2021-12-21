@@ -1,22 +1,23 @@
-import React, { memo, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { AppBar, Toolbar } from '@material-ui/core';
 
-import { Header, SetRoute } from '01_userInterface';
 import { ProductObjType } from 'api';
+import { Header } from 'components';
 import { getLocalData } from 'localStorage';
+import { SetRoute } from 'routes';
 import { goodsAllTC, setCart, useAppDispatch } from 'store';
 
-const commandForGettingData = 1;
-
-export const App = memo(() => {
+export const App = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   // обработка и добавление запланированых покупок из localStorage
   // данные для отрисовки стартовой страницы
   useEffect(() => {
-    getLocalData().map((a: ProductObjType) => dispatch(setCart({ addProduct: a })));
-    dispatch(goodsAllTC(commandForGettingData));
+    getLocalData().map((readyToBuyProduct: ProductObjType) =>
+      dispatch(setCart({ addProduct: readyToBuyProduct })),
+    );
+    dispatch(goodsAllTC());
   }, []);
 
   return (
@@ -29,4 +30,4 @@ export const App = memo(() => {
       <SetRoute />
     </div>
   );
-});
+};

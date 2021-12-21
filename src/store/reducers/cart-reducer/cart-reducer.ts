@@ -1,7 +1,10 @@
+/* eslint-disable no-param-reassign */
+
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FormikErrorType } from '01_userInterface';
 import { API, ProductObjType } from 'api';
+import { FormikErrorType } from 'components';
+import { StartValue } from 'enums';
 import { saveAddedCartToLocalStorage } from 'localStorage';
 
 const initCartState: InitCartType = {
@@ -23,20 +26,22 @@ const slice = createSlice({
   reducers: {
     setCart(state, action: PayloadAction<{ addProduct: ProductObjType }>) {
       const apAddProduct = action.payload.addProduct;
-      // eslint-disable-next-line no-param-reassign
       state.addedCart = [...state.addedCart, apAddProduct];
-      // eslint-disable-next-line no-param-reassign
-      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
+      state.sumPrice = state.addedCart.reduce(
+        (acc, el) => acc + el.price,
+        StartValue.accStartValue,
+      );
       saveAddedCartToLocalStorage(state.addedCart);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
-      // eslint-disable-next-line no-param-reassign
       state.addedCart = state.addedCart.filter(f => f.id !== action.payload.id);
       saveAddedCartToLocalStorage(state.addedCart);
     },
     totalPrice(state) {
-      // eslint-disable-next-line no-param-reassign
-      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
+      state.sumPrice = state.addedCart.reduce(
+        (acc, el) => acc + el.price,
+        StartValue.accStartValue,
+      );
     },
     subtractCart(
       state,
@@ -46,9 +51,7 @@ const slice = createSlice({
     ) {
       state.addedCart.map(a => {
         if (a.id === action.payload.id) {
-          // eslint-disable-next-line no-param-reassign
           a.price -= a.price / a.toPurchase;
-          // eslint-disable-next-line no-param-reassign
           a.toPurchase -= 1;
         }
         return state;
@@ -64,30 +67,29 @@ const slice = createSlice({
       state.addedCart.map(p => {
         const actionP = action.payload;
         if (p.id === actionP.id) {
-          // eslint-disable-next-line no-param-reassign
           p.price += p.price / p.toPurchase;
-          // eslint-disable-next-line no-param-reassign
           p.toPurchase += 1;
         }
         return p;
       });
-      // eslint-disable-next-line no-param-reassign
-      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
+      state.sumPrice = state.addedCart.reduce(
+        (acc, el) => acc + el.price,
+        StartValue.accStartValue,
+      );
       saveAddedCartToLocalStorage(state.addedCart);
     },
     conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
-      // eslint-disable-next-line no-param-reassign
       state.conditionBuy = action.payload.result;
     },
   },
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.conditionBuy = action.payload.data;
-      // eslint-disable-next-line no-param-reassign
       state.addedCart = [];
-      // eslint-disable-next-line no-param-reassign
-      state.sumPrice = state.addedCart.reduce((acc, el) => acc + el.price, 0);
+      state.sumPrice = state.addedCart.reduce(
+        (acc, el) => acc + el.price,
+        StartValue.accStartValue,
+      );
       saveAddedCartToLocalStorage(state.addedCart);
     });
   },

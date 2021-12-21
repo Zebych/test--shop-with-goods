@@ -2,7 +2,7 @@ import { goodsAllTC } from '../goods-reducer';
 import { goodsReducer } from '../goods-reducer/goods-reducer';
 
 import { ResDatatype } from '03_inquiries';
-import photo1 from '04_assets/img/6-1000x1000.jpg';
+import photo1 from 'assets/img/6-1000x1000.jpg';
 
 const startState: ResDatatype = { result: '', data: [] };
 

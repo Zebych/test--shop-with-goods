@@ -3,7 +3,7 @@ import React, { FC, memo, ReactElement } from 'react';
 import { PaymentForm } from './paymentData';
 import { ProductsListContainer } from './productsList';
 
-import styleContainer from '05_common/styles/Container.module.css';
+import styleContainer from 'styles/Container.module.css';
 
 export const Cart: FC<CartPropsType> = memo(
   ({ mediaStyle }): ReactElement => (

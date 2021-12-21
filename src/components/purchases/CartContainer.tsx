@@ -1,4 +1,4 @@
-import React, { memo, ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import { Cart } from './Cart';
 import { dataConditionBuy, useAppDispatch, useAppSelector } from 'store';
 import { conditionBuy } from 'store/reducers/cart-reducer/cart-reducer';
 
-export const CartContainer = memo((): ReactElement => {
+export const CartContainer = (): ReactElement => {
   const conditionBuyData = useAppSelector(dataConditionBuy);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -25,13 +25,14 @@ export const CartContainer = memo((): ReactElement => {
     dispatch(conditionBuy({ result: false }));
   }, [conditionBuyData]);
 
-  // navigate
+  // routes
   if (conditionBuyData) {
     navigate('/test--shop-with-goods', { replace: true });
   }
+
   return (
     <div>
       <Cart mediaStyle={mediaStyle} />
     </div>
   );
-});
+};

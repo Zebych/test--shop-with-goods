@@ -1,7 +1,8 @@
-import React, { memo, ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { ProductsList } from './ProductsList';
 
+import { StartValue } from 'enums';
 import {
   addProductInCart,
   deleteCart,
@@ -13,9 +14,9 @@ import {
   totalPriceCarts,
 } from 'store';
 
-export const ProductsListContainer = memo((): ReactElement => {
+export const ProductsListContainer = (): ReactElement => {
   const productInCart = useAppSelector(isInCart);
-  const amountOfPurchases = useAppSelector(totalPriceCarts);
+  const totalPrise = useAppSelector(totalPriceCarts);
 
   const dispatch = useAppDispatch();
 
@@ -38,14 +39,14 @@ export const ProductsListContainer = memo((): ReactElement => {
       <div>
         <p>shopping list:</p>
         <div style={{ padding: '20px' }}>
-          {productInCart.map(p => (
+          {productInCart.map(product => (
             <ProductsList
-              key={p.id}
-              name={p.name}
-              price={p.price}
-              picture={p.photo}
-              id={p.id}
-              toPurchase={p.toPurchase}
+              key={product.id}
+              name={product.name}
+              price={product.price}
+              picture={product.photo}
+              id={product.id}
+              toPurchase={product.toPurchase}
               subtractProduct={subtractProduct}
               AddProduct={AddProduct}
               DeleteProduct={DeleteProduct}
@@ -53,9 +54,11 @@ export const ProductsListContainer = memo((): ReactElement => {
           ))}
         </div>
         <div>
-          {amountOfPurchases > 0 && <span>amount to pay: {amountOfPurchases}</span>}
+          {totalPrise !== StartValue.emptyСart && (
+            <span>amount to pay: {totalPrise}</span>
+          )}
         </div>
       </div>
     </div>
   );
-});
+};

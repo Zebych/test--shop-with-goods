@@ -20,7 +20,11 @@ export const ProductContainer: FC<ProductContainerPropsType> = memo(
 
     // Проверка на наличие товара в массиве запланированных покупок
     const addInCart = (): void => {
-      if (productsIsInCart.some(productIsInCart => productIsInCart.id === id)) {
+      const alreadyInPurchases = productsIsInCart.some(
+        productIsInCart => productIsInCart.id === id,
+      );
+
+      if (alreadyInPurchases) {
         dispatch(addProductInCart({ id }));
       } else {
         const addProduct = initDataProducts.find(

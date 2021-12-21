@@ -2,6 +2,8 @@ import React, { FC, memo, ReactElement, useCallback } from 'react';
 
 import { Button } from '@material-ui/core';
 
+import { StartValue } from 'enums';
+
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
     picture,
@@ -37,7 +39,7 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
           <p>{price}</p>
         </div>
         <div style={{ display: 'flex' }}>
-          {toPurchase > 1 ? (
+          {toPurchase > StartValue.oneUnit ? (
             <Button variant="contained" color="primary" onClick={onSubtractProductClick}>
               -
             </Button>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FormikErrorType } from '../01_userInterface';
+import { FormikErrorType } from 'components';
 
 const instance = axios.create({
   baseURL: 'https://test-shop-az.herokuapp.com/',

@@ -1,17 +1,14 @@
 // запрос данных состояния localStorage
 import { ProductObjType } from 'api';
 
-export const getLocalData = (): any => {
-  try {
-    const serializedState = localStorage.getItem('addedProduct');
-    if (serializedState !== null) {
-      return JSON.parse(serializedState).filter((l: any) => l !== null);
-    }
-    return [];
-  } catch {
-    return null;
-    // ignore write errors
+export const getLocalData = (): Array<ProductObjType> => {
+  const serializedState = localStorage.getItem('addedProduct');
+  if (serializedState !== null) {
+    return JSON.parse(serializedState).filter(
+      (product: ProductObjType) => product !== null,
+    );
   }
+  return [];
 };
 
 // сохранение состояния в localStorage
