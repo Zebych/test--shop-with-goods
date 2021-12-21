@@ -1,5 +1,5 @@
-export { totalPriceCarts } from './selectors';
-export { isInCart } from './selectors';
-export { goodsArrData } from './selectors';
-export { dataConditionBuy } from './selectors';
-export { initData } from './selectors';
+export { toTotalPriceProductsInCart } from './selectors';
+export { toContentsOfCart } from './selectors';
+export { toGoodsData } from './selectors';
+export { toConditionBuyData } from './selectors';
+export { toInitData } from './selectors';

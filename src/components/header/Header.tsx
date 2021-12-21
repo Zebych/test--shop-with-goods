@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 import cartIcon from 'assets/img/outline_shopping_cart_white_18dp.png';
 import { StartValue } from 'enums';
-import { totalPriceCarts, useAppSelector } from 'store';
+import { toTotalPriceProductsInCart, useAppSelector } from 'store';
 
 export const Header = (): ReactElement => {
-  const totalPrise = useAppSelector(totalPriceCarts);
+  const totalPrise = useAppSelector(toTotalPriceProductsInCart);
 
   return (
     <div>

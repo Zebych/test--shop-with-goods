@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactElement, useCallback } from 'react';
+import React, { FC, memo, ReactElement } from 'react';
 
 import { Button } from '@material-ui/core';
 
@@ -12,18 +12,18 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
     id,
     toPurchase,
     subtractProduct,
-    DeleteProduct,
-    AddProduct,
+    deleteProduct,
+    addProduct,
   }): ReactElement => {
-    const onSubtractProductClick = useCallback(() => {
+    const onSubtractProductClick = (): void => {
       subtractProduct(id);
-    }, []);
-    const onDeleteProductClick = useCallback(() => {
-      DeleteProduct(id);
-    }, []);
-    const onAddProductClick = useCallback(() => {
-      AddProduct(id);
-    }, []);
+    };
+    const onDeleteProductClick = (): void => {
+      deleteProduct(id);
+    };
+    const onAddProductClick = (): void => {
+      addProduct(id);
+    };
 
     return (
       <div style={{ paddingBottom: '10px' }}>
@@ -66,6 +66,6 @@ type ProductsListPropsType = {
   id: number;
   toPurchase: number;
   subtractProduct: (id: number) => void;
-  DeleteProduct: (id: number) => void;
-  AddProduct: (id: number) => void;
+  deleteProduct: (id: number) => void;
+  addProduct: (id: number) => void;
 };

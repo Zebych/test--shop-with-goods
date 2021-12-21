@@ -10,13 +10,13 @@ import {
   totalPrice,
   useAppSelector,
   useAppDispatch,
-  isInCart,
-  totalPriceCarts,
+  toContentsOfCart,
+  toTotalPriceProductsInCart,
 } from 'store';
 
 export const ProductsListContainer = (): ReactElement => {
-  const productInCart = useAppSelector(isInCart);
-  const totalPrise = useAppSelector(totalPriceCarts);
+  const productInCart = useAppSelector(toContentsOfCart);
+  const totalPrise = useAppSelector(toTotalPriceProductsInCart);
 
   const dispatch = useAppDispatch();
 
@@ -27,10 +27,10 @@ export const ProductsListContainer = (): ReactElement => {
   const subtractProduct = (id: number): void => {
     dispatch(subtractCart({ id }));
   };
-  const DeleteProduct = (id: number): void => {
+  const deleteProduct = (id: number): void => {
     dispatch(deleteCart({ id }));
   };
-  const AddProduct = (id: number): void => {
+  const addProduct = (id: number): void => {
     dispatch(addProductInCart({ id }));
   };
 
@@ -39,17 +39,17 @@ export const ProductsListContainer = (): ReactElement => {
       <div>
         <p>shopping list:</p>
         <div style={{ padding: '20px' }}>
-          {productInCart.map(product => (
+          {productInCart.map(({ id, name, price, photo, toPurchase }) => (
             <ProductsList
-              key={product.id}
-              name={product.name}
-              price={product.price}
-              picture={product.photo}
-              id={product.id}
-              toPurchase={product.toPurchase}
+              key={id}
+              name={name}
+              price={price}
+              picture={photo}
+              id={id}
+              toPurchase={toPurchase}
               subtractProduct={subtractProduct}
-              AddProduct={AddProduct}
-              DeleteProduct={DeleteProduct}
+              addProduct={addProduct}
+              deleteProduct={deleteProduct}
             />
           ))}
         </div>

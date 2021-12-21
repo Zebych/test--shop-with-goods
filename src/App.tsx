@@ -5,7 +5,7 @@ import { AppBar, Toolbar } from '@material-ui/core';
 import { ProductObjType } from 'api';
 import { Header } from 'components';
 import { getLocalData } from 'localStorage';
-import { SetRoute } from 'routes';
+import { NavigateRoute } from 'routes';
 import { goodsAllTC, setCart, useAppDispatch } from 'store';
 
 export const App = (): ReactElement => {
@@ -27,7 +27,7 @@ export const App = (): ReactElement => {
           <Header />
         </Toolbar>
       </AppBar>
-      <SetRoute />
+      <NavigateRoute />
     </div>
   );
 };

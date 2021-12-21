@@ -2,10 +2,11 @@ import React, { FC, memo, ReactElement } from 'react';
 
 import { Product } from './Product';
 
+import { ProductObjType } from 'api';
 import {
   addProductInCart,
-  isInCart,
-  initData,
+  toContentsOfCart,
+  toInitData,
   setCart,
   useAppDispatch,
   useAppSelector,
@@ -13,30 +14,32 @@ import {
 
 export const ProductContainer: FC<ProductContainerPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
-    const productsIsInCart = useAppSelector(isInCart);
-    const initDataProducts = useAppSelector(initData);
+    const productsIsInCart = useAppSelector(toContentsOfCart);
+    const initDataProducts = useAppSelector(toInitData);
 
     const dispatch = useAppDispatch();
 
     // Проверка на наличие товара в массиве запланированных покупок
-    const addInCart = (): void => {
+    const buyProductButton = (): ReturnBuyProductButtonType => {
       const alreadyInPurchases = productsIsInCart.some(
         productIsInCart => productIsInCart.id === id,
       );
+      const addProduct = initDataProducts.find(
+        initDataProduct => initDataProduct.id === id,
+      );
 
       if (alreadyInPurchases) {
-        dispatch(addProductInCart({ id }));
-      } else {
-        const addProduct = initDataProducts.find(
-          initDataProduct => initDataProduct.id === id,
-        );
-        if (addProduct) {
-          dispatch(setCart({ addProduct }));
-        }
+        return dispatch(addProductInCart({ id }));
       }
+      if (addProduct) {
+        return dispatch(setCart({ addProduct }));
+      }
+      return undefined;
     };
 
-    return <Product name={name} photo={photo} price={price} addInCart={addInCart} />;
+    return (
+      <Product name={name} photo={photo} price={price} addInCart={buyProductButton} />
+    );
   },
 );
 
@@ -47,3 +50,7 @@ export type ProductContainerPropsType = {
   photo: string;
   price: number;
 };
+type ReturnBuyProductButtonType =
+  | undefined
+  | { payload: { id: number } }
+  | { payload: { addProduct: ProductObjType } };

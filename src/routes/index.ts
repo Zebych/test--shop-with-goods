@@ -1,1 +1,1 @@
-export { SetRoute } from './SetRoute';
+export { NavigateRoute } from './NavigateRoute';

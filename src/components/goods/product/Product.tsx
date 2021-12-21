@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 export const Product: FC<ProductPropsType> = memo(
   ({ photo, addInCart, name, price }): ReactElement => {
-    const onAddInCartClick = useCallback(() => {
+    const onBuyProductButtonClick = useCallback(() => {
       addInCart();
     }, [addInCart]);
 
@@ -17,7 +17,7 @@ export const Product: FC<ProductPropsType> = memo(
         />
         <p>{name}</p>
         <h3>{price}</h3>
-        <Button variant="contained" color="primary" onClick={onAddInCartClick}>
+        <Button variant="contained" color="primary" onClick={onBuyProductButtonClick}>
           buy
         </Button>
       </div>

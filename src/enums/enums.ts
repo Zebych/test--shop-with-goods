@@ -5,3 +5,7 @@ export enum StartValue {
   expirationDateLength = 5,
   oneUnit = 1,
 }
+export enum NavigatePath {
+  goods = '/test--shop-with-goods',
+  cart = '/cart',
+}

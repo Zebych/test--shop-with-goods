@@ -12,11 +12,11 @@ import {
 import { useFormik } from 'formik';
 
 import { StartValue } from 'enums';
-import { isInCart, buyTC, useAppDispatch, useAppSelector } from 'store';
+import { toContentsOfCart, buyTC, useAppDispatch, useAppSelector } from 'store';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useAppDispatch();
-  const addedCart = useAppSelector(isInCart);
+  const addedCart = useAppSelector(toContentsOfCart);
 
   // formik
   const formik = useFormik({
