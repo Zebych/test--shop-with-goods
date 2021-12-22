@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import cartIcon from 'assets/img/outline_shopping_cart_white_18dp.png';
-import { StartValue } from 'enums';
+import { IsInCart } from 'enums';
 import { toTotalPriceProductsInCart, useAppSelector } from 'store';
 
 export const Header = (): ReactElement => {
@@ -20,9 +20,7 @@ export const Header = (): ReactElement => {
       <Link to="/cart" style={{ textDecoration: 'none' }}>
         <Button color="inherit">
           <img src={cartIcon} alt="cart" />
-          {totalPrise !== StartValue.emptyСart && (
-            <p style={{ color: '#fff' }}>{totalPrise}</p>
-          )}
+          {totalPrise !== IsInCart.Empty && <p style={{ color: '#fff' }}>{totalPrise}</p>}
         </Button>
       </Link>
     </div>

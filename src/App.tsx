@@ -11,8 +11,6 @@ import { goodsAllTC, setCart, useAppDispatch } from 'store';
 export const App = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  // обработка и добавление запланированых покупок из localStorage
-  // данные для отрисовки стартовой страницы
   useEffect(() => {
     getLocalData().map((readyToBuyProduct: ProductObjType) =>
       dispatch(setCart({ addProduct: readyToBuyProduct })),

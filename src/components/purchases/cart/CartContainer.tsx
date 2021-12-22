@@ -8,24 +8,23 @@ import { toConditionBuyData, useAppDispatch, useAppSelector } from 'store';
 import { conditionBuy } from 'store/reducers/cart-reducer/cart-reducer';
 
 export const CartContainer = (): ReactElement => {
-  const conditionBuyData = useAppSelector(toConditionBuyData);
+  const [matches, setMatches] = useState(window.matchMedia('(min-width: 550px)').matches);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // media hook
-  const [matches, setMatches] = useState(window.matchMedia('(min-width: 550px)').matches);
+  const conditionBuyData = useAppSelector(toConditionBuyData);
+
   useEffect(() => {
     const evenSetMatches = (e: MediaQueryListEvent): void => setMatches(e.matches);
     window.matchMedia('(min-width: 550px)').addEventListener('change', evenSetMatches);
   }, []);
-  const mediaStyle = matches ? { display: 'flex' } : { display: 'block' };
 
-  // conditionBuy
   useEffect(() => {
     dispatch(conditionBuy({ result: false }));
   }, [conditionBuyData]);
 
-  // routes
+  const mediaStyle = matches ? { display: 'flex' } : { display: 'block' };
+
   if (conditionBuyData) {
     navigate('/test--shop-with-goods', { replace: true });
   }

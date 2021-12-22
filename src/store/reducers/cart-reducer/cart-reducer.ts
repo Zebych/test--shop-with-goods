@@ -2,9 +2,11 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { ACC_START_VALUE } from './constants';
+import { InitCartType } from './types';
+
 import { API, ProductObjType } from 'api';
 import { FormikErrorType } from 'components';
-import { StartValue } from 'enums';
 import { saveAddedCartToLocalStorage } from 'localStorage';
 
 const initCartState: InitCartType = {
@@ -13,7 +15,6 @@ const initCartState: InitCartType = {
   conditionBuy: false,
 };
 
-// Thunk extraReducers
 export const buyTC = createAsyncThunk(
   'cart/buy',
   async (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }) =>
@@ -29,7 +30,7 @@ const slice = createSlice({
       state.addedCart = [...state.addedCart, apAddProduct];
       state.sumPrice = state.addedCart.reduce(
         (acc, el) => acc + el.price,
-        StartValue.accStartValue,
+        ACC_START_VALUE,
       );
       saveAddedCartToLocalStorage(state.addedCart);
     },
@@ -40,7 +41,7 @@ const slice = createSlice({
     totalPrice(state) {
       state.sumPrice = state.addedCart.reduce(
         (acc, el) => acc + el.price,
-        StartValue.accStartValue,
+        ACC_START_VALUE,
       );
     },
     subtractCart(
@@ -74,7 +75,7 @@ const slice = createSlice({
       });
       state.sumPrice = state.addedCart.reduce(
         (acc, el) => acc + el.price,
-        StartValue.accStartValue,
+        ACC_START_VALUE,
       );
       saveAddedCartToLocalStorage(state.addedCart);
     },
@@ -88,7 +89,7 @@ const slice = createSlice({
       state.addedCart = [];
       state.sumPrice = state.addedCart.reduce(
         (acc, el) => acc + el.price,
-        StartValue.accStartValue,
+        ACC_START_VALUE,
       );
       saveAddedCartToLocalStorage(state.addedCart);
     });
@@ -105,10 +106,3 @@ export const {
   deleteCart,
   conditionBuy,
 } = slice.actions;
-
-// Types
-export type InitCartType = {
-  sumPrice: number;
-  addedCart: Array<ProductObjType>;
-  conditionBuy: boolean;
-};

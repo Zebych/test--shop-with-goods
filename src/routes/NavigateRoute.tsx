@@ -8,8 +8,8 @@ import { NavigatePath } from 'enums';
 export const NavigateRoute = memo(
   (): ReactElement => (
     <Routes>
-      <Route path={NavigatePath.goods} element={<Goods />} />
-      <Route path={NavigatePath.cart} element={<CartContainer />} />
+      <Route path={NavigatePath.Goods} element={<Goods />} />
+      <Route path={NavigatePath.Cart} element={<CartContainer />} />
     </Routes>
   ),
 );

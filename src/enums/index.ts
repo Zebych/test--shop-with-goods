@@ -1,2 +1,2 @@
-export { StartValue } from './enums';
+export { IsInCart } from './enums';
 export { NavigatePath } from './enums';

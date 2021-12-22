@@ -4,11 +4,11 @@ import {
   buyTC,
   cartReducer,
   deleteCart,
-  InitCartType,
   setCart,
   subtractCart,
   totalPrice,
 } from '../cart-reducer/cart-reducer';
+import { InitCartType } from "../cart-reducer";
 
 const startState: InitCartType = {
   sumPrice: 0,

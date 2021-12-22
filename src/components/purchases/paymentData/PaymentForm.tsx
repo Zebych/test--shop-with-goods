@@ -11,14 +11,15 @@ import {
 } from '@material-ui/core';
 import { useFormik } from 'formik';
 
-import { StartValue } from 'enums';
-import { toContentsOfCart, buyTC, useAppDispatch, useAppSelector } from 'store';
+import { CARD_NUMBER_LENGTH, EXPIRATION_DATE_LENGTH } from './constants';
+import { FormikErrorType, PaymentFormPropsType } from './types';
+
+import { buyTC, toContentsOfCart, useAppDispatch, useAppSelector } from 'store';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useAppDispatch();
   const addedCart = useAppSelector(toContentsOfCart);
 
-  // formik
   const formik = useFormik({
     initialValues: {
       firstLastName: '',
@@ -33,7 +34,7 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
       if (!values.cardNumber) {
         errors.cardNumber = 'Required';
       } else if (
-        values.cardNumber.length !== StartValue.cardNumberLength ||
+        values.cardNumber.length !== CARD_NUMBER_LENGTH ||
         !/^[0-9]+ [0-9]+ [0-9]+ [0-9]{4}$/i.test(values.cardNumber)
       ) {
         errors.cardNumber = 'Invalid card number';
@@ -46,7 +47,7 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
       if (!values.expirationDate) {
         errors.expirationDate = 'Required';
       } else if (
-        values.expirationDate.length !== StartValue.expirationDateLength ||
+        values.expirationDate.length !== EXPIRATION_DATE_LENGTH ||
         !/^[0-9]+\/[0-9]{2}$/i.test(values.expirationDate)
       ) {
         errors.expirationDate = 'Invalid expirationDate';
@@ -123,15 +124,3 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
     </FormControl>
   );
 });
-
-// Types
-export type FormikErrorType = {
-  firstLastName?: string;
-  cardNumber?: string;
-  expirationDate?: string;
-  password?: string;
-  rememberMe?: boolean;
-};
-type PaymentFormPropsType = {
-  mediaStyle?: object;
-};
