@@ -37,14 +37,15 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(goodsAllTC.fulfilled, (state, action) => {
-      // КОСТЫЛЬ Добавить картинки в вернувшийся c сервера массив
-      state.data = action.payload.data.map((sd: ProductObjType): ProductObjType => {
-        const indexPhoto = state.imgArr.find(img => img.id === sd.id);
-        if (indexPhoto) {
-          sd = { ...sd, photo: indexPhoto.photo };
-        }
-        return sd;
-      });
+      state.data = action.payload.data.map(
+        (productData: ProductObjType): ProductObjType => {
+          const indexPhoto = state.imgArr.find(img => img.id === productData.id);
+          if (indexPhoto) {
+            productData = { ...productData, photo: indexPhoto.photo };
+          }
+          return productData;
+        },
+      );
     });
   },
 });

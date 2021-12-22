@@ -1,18 +1,18 @@
 export { store } from './store';
 export type { AppRootStateType } from './store';
 
-export { useAppDispatch } from './hooksType/hooksType';
-export { useAppSelector } from './hooksType/hooksType';
+export { useAppDispatch } from './hooksType';
+export { useAppSelector } from './hooksType';
 
-export { setCart } from './reducers/cart-reducer';
-export { totalPrice } from './reducers/cart-reducer';
-export { subtractCart } from './reducers/cart-reducer';
-export { addProductInCart } from './reducers/cart-reducer';
-export { deleteCart } from './reducers/cart-reducer';
-export { buyTC } from './reducers/cart-reducer';
-export type { InitCartType } from './reducers/cart-reducer';
+export { setCart } from './reducers';
+export { totalPrice } from './reducers';
+export { subtractCart } from './reducers';
+export { addProductInCart } from './reducers';
+export { deleteCart } from './reducers';
+export { buyTC } from './reducers';
+export type { InitCartType } from './reducers';
 
-export { goodsAllTC } from './reducers/goods-reducer';
+export { goodsAllTC } from './reducers';
 
 export { toTotalPriceProductsInCart } from './selectors';
 export { toContentsOfCart } from './selectors';

@@ -2,6 +2,8 @@ import React, { FC, memo, ReactElement, useCallback } from 'react';
 
 import { Button } from '@material-ui/core';
 
+import { ProductPropsType } from './types';
+
 export const Product: FC<ProductPropsType> = memo(
   ({ photo, addInCart, name, price }): ReactElement => {
     const onBuyProductButtonClick = useCallback(() => {
@@ -24,11 +26,3 @@ export const Product: FC<ProductPropsType> = memo(
     );
   },
 );
-
-// Types
-export type ProductPropsType = {
-  name: string;
-  photo: string;
-  price: number;
-  addInCart: () => void;
-};

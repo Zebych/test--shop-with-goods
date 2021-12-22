@@ -13,10 +13,6 @@ export const getLocalData = (): Array<ProductObjType> => {
 
 // сохранение состояния в localStorage
 export const saveAddedCartToLocalStorage = (state: Array<ProductObjType>): void => {
-  try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('addedProduct', serializedState);
-  } catch {
-    // ignore write errors
-  }
+  const serializedState = JSON.stringify(state);
+  localStorage.setItem('addedProduct', serializedState);
 };

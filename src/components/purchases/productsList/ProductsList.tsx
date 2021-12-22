@@ -2,7 +2,9 @@ import React, { FC, memo, ReactElement } from 'react';
 
 import { Button } from '@material-ui/core';
 
-import { StartValue } from 'enums';
+import { ProductsListPropsType } from './types';
+
+import { IsInCart } from 'enums';
 
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
@@ -39,7 +41,7 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
           <p>{price}</p>
         </div>
         <div style={{ display: 'flex' }}>
-          {toPurchase > StartValue.oneUnit ? (
+          {toPurchase > IsInCart.OneUnit ? (
             <Button variant="contained" color="primary" onClick={onSubtractProductClick}>
               -
             </Button>
@@ -57,15 +59,3 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
     );
   },
 );
-
-// Types
-type ProductsListPropsType = {
-  picture: string;
-  name: string;
-  price: number;
-  id: number;
-  toPurchase: number;
-  subtractProduct: (id: number) => void;
-  deleteProduct: (id: number) => void;
-  addProduct: (id: number) => void;
-};
