@@ -5,10 +5,10 @@ import { Button } from '@material-ui/core';
 import { ProductPropsType } from './types';
 
 export const Product: FC<ProductPropsType> = memo(
-  ({ photo, addInCart, name, price }): ReactElement => {
+  ({ photo, onBuyProductButton, name, price }): ReactElement => {
     const onBuyProductButtonClick = useCallback(() => {
-      addInCart();
-    }, [addInCart]);
+      onBuyProductButton();
+    }, [onBuyProductButton]);
 
     return (
       <div style={{ padding: '20px' }}>

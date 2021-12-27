@@ -1,14 +1,16 @@
-import photo5 from '../../../assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
+import { cartReducer } from '../cart-reducer/cart-reducer';
+
 import {
+  InitCartType,
   addProductInCart,
   buyTC,
-  cartReducer,
   deleteCart,
   setCart,
   subtractCart,
   totalPrice,
-} from '../cart-reducer/cart-reducer';
-import { InitCartType } from "../cart-reducer";
+} from 'store';
 
 const startState: InitCartType = {
   sumPrice: 0,
@@ -16,7 +18,7 @@ const startState: InitCartType = {
     { name: 'mug1', photo: 'photo1', id: 1, price: 100, toPurchase: 2, inStock: 10 },
     { name: 'mug7', photo: 'photo7', id: 7, price: 130, toPurchase: 1, inStock: 10 },
   ],
-  conditionBuy: false,
+  isPurchaseMade: false,
 };
 
 test('add object to shopping array', () => {
@@ -74,7 +76,7 @@ test('add quantity from shopping list', () => {
 
 test('make a purchase', () => {
   const addedCart = [
-    { name: 'mug5', photo: photo5, id: 5, price: 110, toPurchase: 1, inStock: 10 },
+    { name: 'mug5', photo: 'photo5', id: 5, price: 110, toPurchase: 1, inStock: 10 },
   ];
   const values = {
     firstLastName: 'Ivan·Ivanov',
@@ -83,6 +85,7 @@ test('make a purchase', () => {
     password: '111',
     rememberMe: true,
   };
+  // @ts-ignore
   const action = buyTC.fulfilled({ addedCart, values }, 'cart/buy', {
     addedCart,
     values,

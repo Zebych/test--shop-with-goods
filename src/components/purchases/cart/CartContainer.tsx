@@ -1,34 +1,28 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import { Cart } from './Cart';
+import { useMediaStyleHook } from './cartHooks';
 
-import { toConditionBuyData, useAppDispatch, useAppSelector } from 'store';
-import { conditionBuy } from 'store/reducers/cart-reducer/cart-reducer';
+import { NavigatePath } from 'routes';
+import { getPurchaseMadeData, useAppDispatch, useAppSelector, conditionBuy } from 'store';
 
 export const CartContainer = (): ReactElement => {
-  const [matches, setMatches] = useState(window.matchMedia('(min-width: 550px)').matches);
-
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  const conditionBuyData = useAppSelector(toConditionBuyData);
+  const isPurchaseMade = useAppSelector(getPurchaseMadeData);
 
-  useEffect(() => {
-    const evenSetMatches = (e: MediaQueryListEvent): void => setMatches(e.matches);
-    window.matchMedia('(min-width: 550px)').addEventListener('change', evenSetMatches);
-  }, []);
+  const { mediaStyle } = useMediaStyleHook();
 
   useEffect(() => {
     dispatch(conditionBuy({ result: false }));
-  }, [conditionBuyData]);
+  }, [isPurchaseMade]);
 
-  const mediaStyle = matches ? { display: 'flex' } : { display: 'block' };
-
-  if (conditionBuyData) {
-    navigate('/test--shop-with-goods', { replace: true });
+  if (isPurchaseMade) {
+    navigate(NavigatePath.Goods, { replace: true });
   }
 
   return (

@@ -7,13 +7,14 @@ import { InitCartType } from './types';
 
 import { API, ProductObjType } from 'api';
 import { FormikErrorType } from 'components';
-import { saveAddedCartToLocalStorage } from 'localStorage';
+import { keyToLocalStorage, saveAddedCartToLocalStorage } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
   addedCart: [],
-  conditionBuy: false,
+  isPurchaseMade: false,
 };
+const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
 
 export const buyTC = createAsyncThunk(
   'cart/buy',
@@ -32,11 +33,11 @@ const slice = createSlice({
         (acc, el) => acc + el.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart);
+      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
       state.addedCart = state.addedCart.filter(f => f.id !== action.payload.id);
-      saveAddedCartToLocalStorage(state.addedCart);
+      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
     },
     totalPrice(state) {
       state.sumPrice = state.addedCart.reduce(
@@ -57,7 +58,7 @@ const slice = createSlice({
         }
         return state;
       });
-      saveAddedCartToLocalStorage(state.addedCart);
+      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
     },
     addProductInCart(
       state,
@@ -77,21 +78,21 @@ const slice = createSlice({
         (acc, el) => acc + el.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart);
+      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
     },
     conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
-      state.conditionBuy = action.payload.result;
+      state.isPurchaseMade = action.payload.result;
     },
   },
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
-      state.conditionBuy = action.payload.data;
+      state.isPurchaseMade = action.payload.data;
       state.addedCart = [];
       state.sumPrice = state.addedCart.reduce(
         (acc, el) => acc + el.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart);
+      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
     });
   },
 });

@@ -1,16 +1,15 @@
-import React, { ReactElement } from 'react';
+import React, { FC, memo, ReactElement } from 'react';
 
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
+import { HeaderPropsType } from './types';
+
 import cartIcon from 'assets/img/outline_shopping_cart_white_18dp.png';
-import { IsInCart } from 'enums';
-import { toTotalPriceProductsInCart, useAppSelector } from 'store';
+import { IsInCart } from 'components';
 
-export const Header = (): ReactElement => {
-  const totalPrise = useAppSelector(toTotalPriceProductsInCart);
-
-  return (
+export const Header: FC<HeaderPropsType> = memo(
+  ({ totalPrise }): ReactElement => (
     <div>
       <Link to="/test--shop-with-goods" style={{ textDecoration: 'none' }}>
         <Button color="inherit">
@@ -24,5 +23,5 @@ export const Header = (): ReactElement => {
         </Button>
       </Link>
     </div>
-  );
-};
+  ),
+);

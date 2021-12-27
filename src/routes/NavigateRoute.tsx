@@ -2,8 +2,9 @@ import React, { memo, ReactElement } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
+import { NavigatePath } from './routesEnums';
+
 import { Goods, CartContainer } from 'components';
-import { NavigatePath } from 'enums';
 
 export const NavigateRoute = memo(
   (): ReactElement => (

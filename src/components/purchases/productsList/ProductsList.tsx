@@ -1,10 +1,10 @@
-import React, { FC, memo, ReactElement } from 'react';
+import React, { FC, memo, ReactElement, useCallback } from 'react';
 
 import { Button } from '@material-ui/core';
 
 import { ProductsListPropsType } from './types';
 
-import { IsInCart } from 'enums';
+import { IsInCart } from 'components/componentsEnums';
 
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
@@ -13,19 +13,21 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
     price,
     id,
     toPurchase,
-    subtractProduct,
-    deleteProduct,
-    addProduct,
+    onDecreaseNumberOfProductsInCart,
+    onRemoveProductFromCart,
+    onAddProductInCart,
   }): ReactElement => {
-    const onSubtractProductClick = (): void => {
-      subtractProduct(id);
-    };
-    const onDeleteProductClick = (): void => {
-      deleteProduct(id);
-    };
-    const onAddProductClick = (): void => {
-      addProduct(id);
-    };
+    const onDecreaseNumberOfProductsInCartClick = useCallback((): void => {
+      onDecreaseNumberOfProductsInCart(id);
+    }, []);
+
+    const onRemoveProductFromCartClick = useCallback((): void => {
+      onRemoveProductFromCart(id);
+    }, []);
+
+    const onAddProductInCartClick = useCallback((): void => {
+      onAddProductInCart(id);
+    }, []);
 
     return (
       <div style={{ paddingBottom: '10px' }}>
@@ -42,16 +44,24 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
         </div>
         <div style={{ display: 'flex' }}>
           {toPurchase > IsInCart.OneUnit ? (
-            <Button variant="contained" color="primary" onClick={onSubtractProductClick}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onDecreaseNumberOfProductsInCartClick}
+            >
               -
             </Button>
           ) : (
-            <Button variant="contained" color="primary" onClick={onDeleteProductClick}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onRemoveProductFromCartClick}
+            >
               -
             </Button>
           )}
           <div style={{ padding: '10px' }}>{toPurchase}</div>
-          <Button variant="contained" color="primary" onClick={onAddProductClick}>
+          <Button variant="contained" color="primary" onClick={onAddProductInCartClick}>
             +
           </Button>
         </div>

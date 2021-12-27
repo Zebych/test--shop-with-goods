@@ -14,11 +14,11 @@ import { useFormik } from 'formik';
 import { CARD_NUMBER_LENGTH, EXPIRATION_DATE_LENGTH } from './constants';
 import { FormikErrorType, PaymentFormPropsType } from './types';
 
-import { buyTC, toContentsOfCart, useAppDispatch, useAppSelector } from 'store';
+import { buyTC, getDataAboutContentsOfCart, useAppDispatch, useAppSelector } from 'store';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useAppDispatch();
-  const addedCart = useAppSelector(toContentsOfCart);
+  const addedCart = useAppSelector(getDataAboutContentsOfCart);
 
   const formik = useFormik({
     initialValues: {

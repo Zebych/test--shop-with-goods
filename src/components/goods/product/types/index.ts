@@ -15,5 +15,5 @@ export type ProductPropsType = {
   name: string;
   photo: string;
   price: number;
-  addInCart: () => void;
+  onBuyProductButton: () => void;
 };

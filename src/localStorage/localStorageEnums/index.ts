@@ -1,0 +1,1 @@
+export { keyToLocalStorage } from './localStorageEnums';

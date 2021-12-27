@@ -6,8 +6,8 @@ import { ProductContainerPropsType, ReturnBuyProductButtonType } from './types';
 import {
   addProductInCart,
   setCart,
-  toContentsOfCart,
-  toInitData,
+  getDataAboutContentsOfCart,
+  getInitData,
   useAppDispatch,
   useAppSelector,
 } from 'store';
@@ -16,15 +16,15 @@ export const ProductContainer: FC<ProductContainerPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
     const dispatch = useAppDispatch();
 
-    const productsIsInCart = useAppSelector(toContentsOfCart);
-    const initDataProducts = useAppSelector(toInitData);
+    const productsIsInCart = useAppSelector(getDataAboutContentsOfCart);
+    const initDataProducts = useAppSelector(getInitData);
 
-    const buyProductButton = (): ReturnBuyProductButtonType => {
+    const handleBuyProductButton = (): ReturnBuyProductButtonType => {
       const alreadyInPurchases = productsIsInCart.some(
         productIsInCart => productIsInCart.id === id,
       );
 
-      const addProduct = initDataProducts.find(
+      const setProductInCart = initDataProducts.find(
         initDataProduct => initDataProduct.id === id,
       );
 
@@ -32,14 +32,20 @@ export const ProductContainer: FC<ProductContainerPropsType> = memo(
         return dispatch(addProductInCart({ id }));
       }
 
-      if (addProduct) {
-        return dispatch(setCart({ addProduct }));
+      if (setProductInCart) {
+        return dispatch(setCart({ addProduct: setProductInCart }));
       }
+
       return undefined;
     };
 
     return (
-      <Product name={name} photo={photo} price={price} addInCart={buyProductButton} />
+      <Product
+        name={name}
+        photo={photo}
+        price={price}
+        onBuyProductButton={handleBuyProductButton}
+      />
     );
   },
 );
