@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 
 import { ProductsList } from './ProductsList';
 
-import { IsInCart } from 'components';
+import { IsInCart } from 'enum';
 import {
   addProductInCart,
   deleteCart,
@@ -10,29 +10,29 @@ import {
   totalPrice,
   useAppSelector,
   useAppDispatch,
-  getDataAboutContentsOfCart,
-  toTotalPriceOfPlannedPurchases,
+  getCartContents,
+  getSumPrice,
 } from 'store';
 
 export const ProductsListContainer = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const productInCart = useAppSelector(getDataAboutContentsOfCart);
-  const totalPrise = useAppSelector(toTotalPriceOfPlannedPurchases);
+  const productInCart = useAppSelector(getCartContents);
+  const totalPrise = useAppSelector(getSumPrice);
 
   useEffect(() => {
     dispatch(totalPrice());
   }, [productInCart]);
 
-  const handleDecreaseNumberOfProductsInCart = (id: number): void => {
+  const handleRemoveProductInCart = (id: number): void => {
     dispatch(subtractCart({ id }));
   };
 
-  const handleRemoveProductFromCart = (id: number): void => {
+  const handleDeleteProductFromCart = (id: number): void => {
     dispatch(deleteCart({ id }));
   };
 
-  const handleAddProductInCart = (id: number): void => {
+  const handleAddItemToCart = (id: number): void => {
     dispatch(addProductInCart({ id }));
   };
 
@@ -48,9 +48,9 @@ export const ProductsListContainer = (): ReactElement => {
             picture={photo}
             id={id}
             toPurchase={toPurchase}
-            onDecreaseNumberOfProductsInCart={handleDecreaseNumberOfProductsInCart}
-            onAddProductInCart={handleAddProductInCart}
-            onRemoveProductFromCart={handleRemoveProductFromCart}
+            onRemoveProductInCart={handleRemoveProductInCart}
+            onAddItemToCart={handleAddItemToCart}
+            onDeleteProductFromCart={handleDeleteProductFromCart}
           />
         ))}
       </div>

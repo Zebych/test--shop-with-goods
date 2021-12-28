@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 import { ProductsListPropsType } from './types';
 
-import { IsInCart } from 'components';
+import { IsInCart } from 'enum';
 
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
@@ -13,21 +13,21 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
     price,
     id,
     toPurchase,
-    onDecreaseNumberOfProductsInCart,
-    onRemoveProductFromCart,
-    onAddProductInCart,
+    onRemoveProductInCart,
+    onDeleteProductFromCart,
+    onAddItemToCart,
   }): ReactElement => {
-    const onDecreaseNumberOfProductsInCartClick = useCallback((): void => {
-      onDecreaseNumberOfProductsInCart(id);
-    }, []);
+    const onRemoveProductInCartClick = useCallback((): void => {
+      onRemoveProductInCart(id);
+    }, [id]);
 
-    const onRemoveProductFromCartClick = useCallback((): void => {
-      onRemoveProductFromCart(id);
-    }, []);
+    const onDeleteProductFromCartClick = useCallback((): void => {
+      onDeleteProductFromCart(id);
+    }, [id]);
 
-    const onAddProductInCartClick = useCallback((): void => {
-      onAddProductInCart(id);
-    }, []);
+    const onAddItemToCartClick = useCallback((): void => {
+      onAddItemToCart(id);
+    }, [id]);
 
     return (
       <div style={{ paddingBottom: '10px' }}>
@@ -47,7 +47,7 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
             <Button
               variant="contained"
               color="primary"
-              onClick={onDecreaseNumberOfProductsInCartClick}
+              onClick={onRemoveProductInCartClick}
             >
               -
             </Button>
@@ -55,13 +55,13 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
             <Button
               variant="contained"
               color="primary"
-              onClick={onRemoveProductFromCartClick}
+              onClick={onDeleteProductFromCartClick}
             >
               -
             </Button>
           )}
           <div style={{ padding: '10px' }}>{toPurchase}</div>
-          <Button variant="contained" color="primary" onClick={onAddProductInCartClick}>
+          <Button variant="contained" color="primary" onClick={onAddItemToCartClick}>
             +
           </Button>
         </div>

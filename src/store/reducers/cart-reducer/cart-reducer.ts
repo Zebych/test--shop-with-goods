@@ -5,21 +5,21 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ACC_START_VALUE } from './constants';
 import { InitCartType } from './types';
 
-import { API, ProductObjType } from 'api';
+import { apiRequests, ProductObjType } from 'api';
 import { FormikErrorType } from 'components';
-import { keyToLocalStorage, saveAddedCartToLocalStorage } from 'localStorage';
+import { keyToLocalStorage, saveCartContentsLocally } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
-  containedInCarts: [],
+  cartContents: [],
   isPurchaseMade: false,
 };
 const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
 
 export const buyTC = createAsyncThunk(
-  'cart/buy',
-  async (param: { addedCart: Array<ProductObjType>; values: FormikErrorType }) =>
-    API.postPurchases(param.addedCart, param.values),
+  'shoppingCart/buy',
+  async (param: { addedCart: ProductObjType[]; values: FormikErrorType }) =>
+    apiRequests.setPostPurchases(param.addedCart, param.values),
 );
 
 const slice = createSlice({
@@ -28,21 +28,21 @@ const slice = createSlice({
   reducers: {
     setCart(state, action: PayloadAction<{ addProduct: ProductObjType }>) {
       const apAddProduct = action.payload.addProduct;
-      state.containedInCarts = [...state.containedInCarts, apAddProduct];
-      state.sumPrice = state.containedInCarts.reduce(
+      state.cartContents = [...state.cartContents, apAddProduct];
+      state.sumPrice = state.cartContents.reduce(
         (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
+      saveCartContentsLocally(state.cartContents, keyToLocalData);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
-      state.containedInCarts = state.containedInCarts.filter(
+      state.cartContents = state.cartContents.filter(
         product => product.id !== action.payload.id,
       );
-      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
+      saveCartContentsLocally(state.cartContents, keyToLocalData);
     },
     totalPrice(state) {
-      state.sumPrice = state.containedInCarts.reduce(
+      state.sumPrice = state.cartContents.reduce(
         (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
@@ -53,14 +53,14 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.containedInCarts.map(product => {
+      state.cartContents.map(product => {
         if (product.id === action.payload.id) {
           product.price -= product.price / product.toPurchase;
           product.toPurchase -= 1;
         }
         return state;
       });
-      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
+      saveCartContentsLocally(state.cartContents, keyToLocalData);
     },
     addProductInCart(
       state,
@@ -68,7 +68,7 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.containedInCarts.map(product => {
+      state.cartContents.map(product => {
         const actionP = action.payload;
         if (product.id === actionP.id) {
           product.price += product.price / product.toPurchase;
@@ -76,11 +76,11 @@ const slice = createSlice({
         }
         return product;
       });
-      state.sumPrice = state.containedInCarts.reduce(
+      state.sumPrice = state.cartContents.reduce(
         (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
+      saveCartContentsLocally(state.cartContents, keyToLocalData);
     },
     conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
       state.isPurchaseMade = action.payload.result;
@@ -89,12 +89,12 @@ const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
       state.isPurchaseMade = action.payload.data;
-      state.containedInCarts = [];
-      state.sumPrice = state.containedInCarts.reduce(
+      state.cartContents = [];
+      state.sumPrice = state.cartContents.reduce(
         (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
+      saveCartContentsLocally(state.cartContents, keyToLocalData);
     });
   },
 });

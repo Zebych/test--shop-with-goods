@@ -12,7 +12,7 @@ export const getLocalData = (keyToLocalData: string): Array<ProductObjType> => {
 };
 
 // сохранение состояния в localStorage
-export const saveAddedCartToLocalStorage = (
+export const saveCartContentsLocally = (
   state: Array<ProductObjType>,
   keyToLocalData: string,
 ): void => {

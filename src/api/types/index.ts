@@ -9,8 +9,8 @@ export type ProductObjType = {
 
 export type ResDatatype = {
   result: string;
-  data: Array<ProductObjType>;
-  imgArr: Array<ImgObjType>;
+  data: ProductObjType[];
+  imgArr: ImgObjType[];
 };
 
 export type ImgObjType = {

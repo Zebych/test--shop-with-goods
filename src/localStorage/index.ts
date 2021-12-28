@@ -1,3 +1,3 @@
 export { getLocalData } from './localStorage';
-export { saveAddedCartToLocalStorage } from './localStorage';
+export { saveCartContentsLocally } from './localStorage';
 export { keyToLocalStorage } from './localStorageEnums';
