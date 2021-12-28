@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Cart } from './Cart';
-import { useMediaStyleHook } from './cartHooks';
+import { useCartMediaHook } from './cartHooks';
 
 import { NavigatePath } from 'routes';
 import { getPurchaseMadeData, useAppDispatch, useAppSelector, conditionBuy } from 'store';
@@ -15,7 +15,8 @@ export const CartContainer = (): ReactElement => {
 
   const isPurchaseMade = useAppSelector(getPurchaseMadeData);
 
-  const { mediaStyle } = useMediaStyleHook();
+  const { matches } = useCartMediaHook();
+  const mediaStyle = matches ? { display: 'flex' } : { display: 'block' };
 
   useEffect(() => {
     dispatch(conditionBuy({ result: false }));

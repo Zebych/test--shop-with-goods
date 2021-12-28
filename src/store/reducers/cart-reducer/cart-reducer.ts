@@ -11,7 +11,7 @@ import { keyToLocalStorage, saveAddedCartToLocalStorage } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
-  addedCart: [],
+  containedInCarts: [],
   isPurchaseMade: false,
 };
 const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
@@ -28,20 +28,22 @@ const slice = createSlice({
   reducers: {
     setCart(state, action: PayloadAction<{ addProduct: ProductObjType }>) {
       const apAddProduct = action.payload.addProduct;
-      state.addedCart = [...state.addedCart, apAddProduct];
-      state.sumPrice = state.addedCart.reduce(
-        (acc, el) => acc + el.price,
+      state.containedInCarts = [...state.containedInCarts, apAddProduct];
+      state.sumPrice = state.containedInCarts.reduce(
+        (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
+      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
-      state.addedCart = state.addedCart.filter(f => f.id !== action.payload.id);
-      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
+      state.containedInCarts = state.containedInCarts.filter(
+        product => product.id !== action.payload.id,
+      );
+      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
     },
     totalPrice(state) {
-      state.sumPrice = state.addedCart.reduce(
-        (acc, el) => acc + el.price,
+      state.sumPrice = state.containedInCarts.reduce(
+        (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
     },
@@ -51,14 +53,14 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.addedCart.map(a => {
-        if (a.id === action.payload.id) {
-          a.price -= a.price / a.toPurchase;
-          a.toPurchase -= 1;
+      state.containedInCarts.map(product => {
+        if (product.id === action.payload.id) {
+          product.price -= product.price / product.toPurchase;
+          product.toPurchase -= 1;
         }
         return state;
       });
-      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
+      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
     },
     addProductInCart(
       state,
@@ -66,19 +68,19 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.addedCart.map(p => {
+      state.containedInCarts.map(product => {
         const actionP = action.payload;
-        if (p.id === actionP.id) {
-          p.price += p.price / p.toPurchase;
-          p.toPurchase += 1;
+        if (product.id === actionP.id) {
+          product.price += product.price / product.toPurchase;
+          product.toPurchase += 1;
         }
-        return p;
+        return product;
       });
-      state.sumPrice = state.addedCart.reduce(
-        (acc, el) => acc + el.price,
+      state.sumPrice = state.containedInCarts.reduce(
+        (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
+      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
     },
     conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
       state.isPurchaseMade = action.payload.result;
@@ -87,12 +89,12 @@ const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
       state.isPurchaseMade = action.payload.data;
-      state.addedCart = [];
-      state.sumPrice = state.addedCart.reduce(
-        (acc, el) => acc + el.price,
+      state.containedInCarts = [];
+      state.sumPrice = state.containedInCarts.reduce(
+        (acc, product) => acc + product.price,
         ACC_START_VALUE,
       );
-      saveAddedCartToLocalStorage(state.addedCart, keyToLocalData);
+      saveAddedCartToLocalStorage(state.containedInCarts, keyToLocalData);
     });
   },
 });

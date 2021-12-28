@@ -1,1 +1,1 @@
-export { useMediaStyleHook } from './useMediaStyleHook';
+export { useCartMediaHook } from './useCartMediaHook';

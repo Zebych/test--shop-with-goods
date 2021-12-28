@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 import { ProductsListPropsType } from './types';
 
-import { IsInCart } from 'components/componentsEnums';
+import { IsInCart } from 'components';
 
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
