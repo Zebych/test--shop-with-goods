@@ -6,8 +6,8 @@ import { ProductContainerPropsType, ReturnBuyProductButtonType } from './types';
 import {
   addProductInCart,
   setCart,
-  getDataAboutContentsOfCart,
-  getInitData,
+  getCartContents,
+  getRawDataOfGoods,
   useAppDispatch,
   useAppSelector,
 } from 'store';
@@ -16,24 +16,20 @@ export const ProductContainer: FC<ProductContainerPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
     const dispatch = useAppDispatch();
 
-    const productsIsInCart = useAppSelector(getDataAboutContentsOfCart);
-    const initDataProducts = useAppSelector(getInitData);
+    const cartContents = useAppSelector(getCartContents);
+    const rawDataOfGoods = useAppSelector(getRawDataOfGoods);
 
     const handleBuyProductButton = (): ReturnBuyProductButtonType => {
-      const alreadyInPurchases = productsIsInCart.some(
-        productIsInCart => productIsInCart.id === id,
-      );
+      const hasPurchase = cartContents.some(product => product.id === id);
 
-      const setProductInCart = initDataProducts.find(
-        initDataProduct => initDataProduct.id === id,
-      );
+      const hasProductRawData = rawDataOfGoods.find(product => product.id === id);
 
-      if (alreadyInPurchases) {
+      if (hasPurchase) {
         return dispatch(addProductInCart({ id }));
       }
 
-      if (setProductInCart) {
-        return dispatch(setCart({ addProduct: setProductInCart }));
+      if (hasProductRawData) {
+        return dispatch(setCart({ addProduct: hasProductRawData }));
       }
 
       return undefined;

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { API, ProductObjType, ResDatatype } from 'api';
+import { apiRequests, ProductObjType, ResDatatype } from 'api';
 import mug1 from 'assets/img/6-1000x1000.jpg';
 import mug3 from 'assets/img/6064641689.jpg';
 import mug2 from 'assets/img/680395566_w640_h640_kruzhka-s-prikolom.jpg';
@@ -26,7 +26,7 @@ const initGoodsState: ResDatatype = {
 };
 
 export const goodsAllTC = createAsyncThunk('goods/goodsAll', async (arg, thunkAPI) => {
-  const { data } = await API.getGoodsAll();
+  const { data } = await apiRequests.getGoodsAll();
   thunkAPI.dispatch(totalPrice());
   return { data };
 });

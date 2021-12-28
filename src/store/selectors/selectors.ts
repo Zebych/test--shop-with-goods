@@ -1,14 +1,12 @@
 import { ProductObjType } from 'api';
 import { AppRootStateType } from 'store';
 
-export const toTotalPriceOfPlannedPurchases = (state: AppRootStateType): number =>
-  state.cart.sumPrice;
-export const getDataAboutContentsOfCart = (
-  state: AppRootStateType,
-): Array<ProductObjType> => state.cart.containedInCarts;
-export const getGoodsData = (state: AppRootStateType): Array<ProductObjType> =>
+export const getSumPrice = (state: AppRootStateType): number => state.cart.sumPrice;
+export const getCartContents = (state: AppRootStateType): Array<ProductObjType> =>
+  state.cart.cartContents;
+export const getGoodsData = (state: AppRootStateType): ProductObjType[] =>
   state.goods.data;
-export const getPurchaseMadeData = (state: AppRootStateType): boolean =>
+export const getDataIsPurchaseMade = (state: AppRootStateType): boolean =>
   state.cart.isPurchaseMade;
-export const getInitData = (state: AppRootStateType): Array<ProductObjType> =>
+export const getRawDataOfGoods = (state: AppRootStateType): Array<ProductObjType> =>
   state.goods.data;

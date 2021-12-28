@@ -15,8 +15,8 @@ export type { InitCartType } from './reducers';
 
 export { goodsAllTC } from './reducers';
 
-export { toTotalPriceOfPlannedPurchases } from './selectors';
-export { getDataAboutContentsOfCart } from './selectors';
+export { getSumPrice } from './selectors';
+export { getCartContents } from './selectors';
 export { getGoodsData } from './selectors';
-export { getPurchaseMadeData } from './selectors';
-export { getInitData } from './selectors';
+export { getDataIsPurchaseMade } from './selectors';
+export { getRawDataOfGoods } from './selectors';

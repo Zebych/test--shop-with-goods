@@ -4,7 +4,7 @@ export type ProductsListPropsType = {
   price: number;
   id: number;
   toPurchase: number;
-  onDecreaseNumberOfProductsInCart: (id: number) => void;
-  onRemoveProductFromCart: (id: number) => void;
-  onAddProductInCart: (id: number) => void;
+  onRemoveProductInCart: (id: number) => void;
+  onDeleteProductFromCart: (id: number) => void;
+  onAddItemToCart: (id: number) => void;
 };
