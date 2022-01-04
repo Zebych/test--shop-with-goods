@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/test--shop-with-goods/static/css/main.aa1db714.chunk.css",
-    "main.js": "/test--shop-with-goods/static/js/main.8b15af47.chunk.js",
-    "main.js.map": "/test--shop-with-goods/static/js/main.8b15af47.chunk.js.map",
+    "main.js": "/test--shop-with-goods/static/js/main.06ebb401.chunk.js",
+    "main.js.map": "/test--shop-with-goods/static/js/main.06ebb401.chunk.js.map",
     "runtime-main.js": "/test--shop-with-goods/static/js/runtime-main.6d13e360.js",
     "runtime-main.js.map": "/test--shop-with-goods/static/js/runtime-main.6d13e360.js.map",
     "static/js/2.67de0e44.chunk.js": "/test--shop-with-goods/static/js/2.67de0e44.chunk.js",
@@ -24,6 +24,6 @@
     "static/js/runtime-main.6d13e360.js",
     "static/js/2.67de0e44.chunk.js",
     "static/css/main.aa1db714.chunk.css",
-    "static/js/main.8b15af47.chunk.js"
+    "static/js/main.06ebb401.chunk.js"
   ]
 }
