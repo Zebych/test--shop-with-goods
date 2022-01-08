@@ -1,15 +1,17 @@
 import React, { ReactElement, useEffect } from 'react';
 
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, LinearProgress, Toolbar } from '@material-ui/core';
 
 import { ProductObjType } from 'api';
 import { HeaderContainer } from 'components';
 import { getLocalData, keyToLocalStorage } from 'localStorage';
 import { NavigateRoute } from 'routes';
-import { goodsAllTC, setCart, useAppDispatch } from 'store';
+import { goodsAllTC, getAppStatus, setCart, useAppDispatch, useAppSelector } from 'store';
 
 export const App = (): ReactElement => {
   const dispatch = useAppDispatch();
+
+  const status = useAppSelector(getAppStatus);
 
   useEffect(() => {
     getLocalData(keyToLocalStorage.productsPlannedForPurchase).map(
@@ -25,6 +27,7 @@ export const App = (): ReactElement => {
         <Toolbar style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <HeaderContainer />
         </Toolbar>
+        {status === 'loading' && <LinearProgress />}
       </AppBar>
       <NavigateRoute />
     </div>

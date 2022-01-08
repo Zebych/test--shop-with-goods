@@ -11,7 +11,7 @@ import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <HashRouter basename="/">
       <Provider store={store}>
         <App />
       </Provider>

@@ -12,6 +12,7 @@ export { deleteCart } from './reducers';
 export { buyTC } from './reducers';
 export { conditionBuy } from './reducers';
 export type { InitCartType } from './reducers';
+export type { RequestStatusType } from './reducers';
 
 export { goodsAllTC } from './reducers';
 
@@ -20,3 +21,4 @@ export { getCartContents } from './selectors';
 export { getGoodsData } from './selectors';
 export { getDataIsPurchaseMade } from './selectors';
 export { getRawDataOfGoods } from './selectors';
+export { getAppStatus } from './selectors';
