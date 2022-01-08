@@ -2,6 +2,8 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { setAppStatus } from '../app-reducer/app-reducer';
+
 import { ACC_START_VALUE } from './constants';
 import { InitCartType } from './types';
 
@@ -18,8 +20,12 @@ const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
 
 export const buyTC = createAsyncThunk(
   'shoppingCart/buy',
-  async (param: { addedCart: ProductObjType[]; values: FormikErrorType }) =>
-    apiRequests.setPostPurchases(param.addedCart, param.values),
+  async (param: { addedCart: ProductObjType[]; values: FormikErrorType }, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({ status: 'loading' }));
+    const { data } = await apiRequests.setPostPurchases(param.addedCart, param.values);
+    thunkAPI.dispatch(setAppStatus({ status: 'succeeded' }));
+    return { data };
+  },
 );
 
 const slice = createSlice({
