@@ -1,4 +1,4 @@
 export enum NavigatePath {
-  Goods = '/',
+  Goods = '/test--shop-with-goods',
   Cart = '/cart',
 }

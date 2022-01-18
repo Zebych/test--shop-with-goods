@@ -11,7 +11,7 @@ import { store } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
