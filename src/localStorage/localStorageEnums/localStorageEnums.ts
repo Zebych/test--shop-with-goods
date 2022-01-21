@@ -1,3 +1,3 @@
-export enum keyToLocalStorage {
-  productsPlannedForPurchase = 'addedProduct',
+export enum LocalStorageKey {
+  ProductsPlannedForPurchase = 'addedProduct',
 }

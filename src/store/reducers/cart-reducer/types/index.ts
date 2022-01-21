@@ -1,7 +1,7 @@
-import { ProductObjType } from 'api';
+import { ProductType } from 'api';
 
 export type InitCartType = {
   sumPrice: number;
-  cartContents: Array<ProductObjType>;
+  cartProducts: Array<ProductType>;
   isPurchaseMade: boolean;
 };

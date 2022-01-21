@@ -1,0 +1,1 @@
+export { selectDataIsPurchaseMade } from './isPurchaseMade';

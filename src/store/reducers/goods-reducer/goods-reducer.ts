@@ -1,22 +1,23 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { setAppStatus } from '../app-reducer/app-reducer';
+import { setAppStatus } from '../app-reducer';
+import { totalPrice } from '../cart-reducer';
 
-import { apiRequests, ProductObjType, ResDatatype } from 'api';
-import mug1 from 'assets/img/6-1000x1000.jpg';
-import mug3 from 'assets/img/6064641689.jpg';
-import mug2 from 'assets/img/680395566_w640_h640_kruzhka-s-prikolom.jpg';
-import mug4 from 'assets/img/kruzhka_sgushchenka_img.webp';
-import mug5 from 'assets/img/people_2_mug_chameleon_front_whitered_500.jpg';
-import mug6 from 'assets/img/pic1white.jpg';
-import mug7 from 'assets/img/product_57508_0_0_0.jpg';
-import { totalPrice } from 'store/index';
+import { API, ProductType, InitGoodsStateType } from 'api';
+import mug6 from 'assets/img/mugDrinkYourself.jpg';
+import mug5 from 'assets/img/mugHot.jpg';
+import mug1 from 'assets/img/mugMickeyMouse.jpg';
+import mug2 from 'assets/img/mugMyCoffe.jpg';
+import mug4 from 'assets/img/mugSgushchenka.webp';
+import mug7 from 'assets/img/mugYouAreBest.jpg';
+import mug3 from 'assets/img/mugYouAreMine.jpg';
+import { PreloaderStatus } from 'enum';
 
-const initGoodsState: ResDatatype = {
+const initGoodsState: InitGoodsStateType = {
   result: '',
   data: [],
-  imgArr: [
+  images: [
     { id: 1, photo: mug1 },
     { id: 2, photo: mug2 },
     { id: 3, photo: mug3 },
@@ -28,10 +29,13 @@ const initGoodsState: ResDatatype = {
 };
 
 export const goodsAllTC = createAsyncThunk('goods/goodsAll', async (arg, thunkAPI) => {
-  thunkAPI.dispatch(setAppStatus({ status: 'loading' }));
-  const { data } = await apiRequests.getGoodsAll();
+  thunkAPI.dispatch(setAppStatus({ status: PreloaderStatus.Loading }));
+
+  const { data } = await API.getGoodsAll();
+
   thunkAPI.dispatch(totalPrice());
-  thunkAPI.dispatch(setAppStatus({ status: 'succeeded' }));
+  thunkAPI.dispatch(setAppStatus({ status: PreloaderStatus.Succeeded }));
+
   return { data };
 });
 
@@ -41,15 +45,17 @@ const slice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(goodsAllTC.fulfilled, (state, action) => {
-      state.data = action.payload.data.map(
-        (productData: ProductObjType): ProductObjType => {
-          const indexPhoto = state.imgArr.find(img => img.id === productData.id);
-          if (indexPhoto) {
-            productData = { ...productData, photo: indexPhoto.photo };
-          }
-          return productData;
-        },
-      );
+      const { data } = action.payload;
+
+      state.data = data.map((productData: ProductType): ProductType => {
+        const indexPhoto = state.images.find(({ id }) => id === productData.id);
+
+        if (indexPhoto) {
+          productData = { ...productData, photo: indexPhoto.photo };
+        }
+
+        return productData;
+      });
     });
   },
 });

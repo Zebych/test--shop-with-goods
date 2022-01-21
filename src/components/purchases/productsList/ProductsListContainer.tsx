@@ -2,23 +2,16 @@ import React, { ReactElement, useEffect } from 'react';
 
 import { ProductsList } from './ProductsList';
 
-import { IsInCart } from 'enum';
-import {
-  addProductInCart,
-  deleteCart,
-  subtractCart,
-  totalPrice,
-  useAppSelector,
-  useAppDispatch,
-  getCartContents,
-  getSumPrice,
-} from 'store';
+import { CartStatus } from 'enum';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { addProductInCart, deleteCart, subtractCart, totalPrice } from 'store/reducers';
+import { selectCartContents, selectSumPrice } from 'store/selectors';
 
 export const ProductsListContainer = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const productInCart = useAppSelector(getCartContents);
-  const totalPrise = useAppSelector(getSumPrice);
+  const productInCart = useAppSelector(selectCartContents);
+  const totalPrise = useAppSelector(selectSumPrice);
 
   useEffect(() => {
     dispatch(totalPrice());
@@ -55,7 +48,7 @@ export const ProductsListContainer = (): ReactElement => {
         ))}
       </div>
       <div>
-        {totalPrise !== IsInCart.Empty && <span>amount to pay: {totalPrise}</span>}
+        {totalPrise !== CartStatus.Empty && <span>amount to pay: {totalPrise}</span>}
       </div>
     </div>
   );

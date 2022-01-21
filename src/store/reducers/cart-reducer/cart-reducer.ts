@@ -1,56 +1,58 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { setAppStatus } from '../app-reducer/app-reducer';
+import { setAppStatus } from '../app-reducer';
 
-import { ACC_START_VALUE } from './constants';
+import { CART, UNIT } from './constants';
 import { InitCartType } from './types';
 
-import { apiRequests, ProductObjType } from 'api';
-import { FormikErrorType } from 'components';
-import { keyToLocalStorage, saveCartContentsLocally } from 'localStorage';
+import { API, ProductType } from 'api';
+import { FormikValuesType } from 'components';
+import { PreloaderStatus } from 'enum';
+import { LocalStorageKey, saveCartContentsLocally } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
-  cartContents: [],
+  cartProducts: [],
   isPurchaseMade: false,
 };
-const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
+const keyToLocalData = LocalStorageKey.ProductsPlannedForPurchase;
 
 export const buyTC = createAsyncThunk(
   'shoppingCart/buy',
-  async (param: { addedCart: ProductObjType[]; values: FormikErrorType }, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({ status: 'loading' }));
-    const { data } = await apiRequests.setPostPurchases(param.addedCart, param.values);
-    thunkAPI.dispatch(setAppStatus({ status: 'succeeded' }));
+  async (param: { addedCart: ProductType[]; values: FormikValuesType }, { dispatch }) => {
+    dispatch(setAppStatus({ status: PreloaderStatus.Loading }));
+    const { data } = await API.setPostPurchases(param.addedCart, param.values);
+    dispatch(setAppStatus({ status: PreloaderStatus.Succeeded }));
     return { data };
   },
 );
 
 const slice = createSlice({
-  name: 'cart',
+  name: CART,
   initialState: initCartState,
   reducers: {
-    setCart(state, action: PayloadAction<{ addProduct: ProductObjType }>) {
-      const apAddProduct = action.payload.addProduct;
-      state.cartContents = [...state.cartContents, apAddProduct];
-      state.sumPrice = state.cartContents.reduce(
+    setCart(state, action: PayloadAction<{ addProduct: ProductType }>) {
+      const { addProduct } = action.payload;
+      state.cartProducts = [...state.cartProducts, addProduct];
+      state.sumPrice = state.cartProducts.reduce(
         (acc, product) => acc + product.price,
-        ACC_START_VALUE,
+        0,
       );
-      saveCartContentsLocally(state.cartContents, keyToLocalData);
+      saveCartContentsLocally(state.cartProducts, keyToLocalData);
     },
     deleteCart(state, action: PayloadAction<{ id: number }>) {
-      state.cartContents = state.cartContents.filter(
+      state.cartProducts = state.cartProducts.filter(
         product => product.id !== action.payload.id,
       );
-      saveCartContentsLocally(state.cartContents, keyToLocalData);
+      saveCartContentsLocally(state.cartProducts, keyToLocalData);
     },
     totalPrice(state) {
-      state.sumPrice = state.cartContents.reduce(
+      state.sumPrice = state.cartProducts.reduce(
         (acc, product) => acc + product.price,
-        ACC_START_VALUE,
+        0,
       );
     },
     subtractCart(
@@ -59,14 +61,15 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.cartContents.map(product => {
-        if (product.id === action.payload.id) {
-          product.price -= product.price / product.toPurchase;
-          product.toPurchase -= 1;
+      state.cartProducts.map(product => {
+        const { id, price, toPurchase } = product;
+        if (id === action.payload.id) {
+          product.price -= price / toPurchase;
+          product.toPurchase -= UNIT;
         }
         return state;
       });
-      saveCartContentsLocally(state.cartContents, keyToLocalData);
+      saveCartContentsLocally(state.cartProducts, keyToLocalData);
     },
     addProductInCart(
       state,
@@ -74,19 +77,19 @@ const slice = createSlice({
         id: number;
       }>,
     ) {
-      state.cartContents.map(product => {
-        const actionP = action.payload;
-        if (product.id === actionP.id) {
-          product.price += product.price / product.toPurchase;
-          product.toPurchase += 1;
+      state.cartProducts.map(product => {
+        const { id, price, toPurchase } = product;
+        if (id === action.payload.id) {
+          product.price += price / toPurchase;
+          product.toPurchase += UNIT;
         }
         return product;
       });
-      state.sumPrice = state.cartContents.reduce(
+      state.sumPrice = state.cartProducts.reduce(
         (acc, product) => acc + product.price,
-        ACC_START_VALUE,
+        0,
       );
-      saveCartContentsLocally(state.cartContents, keyToLocalData);
+      saveCartContentsLocally(state.cartProducts, keyToLocalData);
     },
     conditionBuy(state, action: PayloadAction<{ result: boolean }>) {
       state.isPurchaseMade = action.payload.result;
@@ -95,12 +98,12 @@ const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(buyTC.fulfilled, (state, action) => {
       state.isPurchaseMade = action.payload.data;
-      state.cartContents = [];
-      state.sumPrice = state.cartContents.reduce(
+      state.cartProducts = [];
+      state.sumPrice = state.cartProducts.reduce(
         (acc, product) => acc + product.price,
-        ACC_START_VALUE,
+        0,
       );
-      saveCartContentsLocally(state.cartContents, keyToLocalData);
+      saveCartContentsLocally(state.cartProducts, keyToLocalData);
     });
   },
 });

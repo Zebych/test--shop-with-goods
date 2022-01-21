@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { HeaderPropsType } from './types';
 
-import cartIcon from 'assets/img/outline_shopping_cart_white_18dp.png';
-import { IsInCart, NavigatePath } from 'enum';
+import cartIcon from 'assets/img/iconShoppingCart.png';
+import { CartStatus, NavigatePath } from 'enum';
 
 export const Header: FC<HeaderPropsType> = memo(
   ({ sumPrice }): ReactElement => (
@@ -19,7 +19,7 @@ export const Header: FC<HeaderPropsType> = memo(
       <Link to={NavigatePath.Cart} style={{ textDecoration: 'none' }}>
         <Button color="inherit">
           <img src={cartIcon} alt="cart" />
-          {sumPrice !== IsInCart.Empty && <p style={{ color: '#fff' }}>{sumPrice}</p>}
+          {sumPrice !== CartStatus.Empty && <p style={{ color: '#fff' }}>{sumPrice}</p>}
         </Button>
       </Link>
     </div>

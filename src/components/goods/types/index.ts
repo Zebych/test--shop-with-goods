@@ -1,5 +1,5 @@
-import { ProductObjType } from 'api';
+import { ProductType } from 'api';
 
 export type GoodsPropsType = {
-  allProducts: ProductObjType[];
+  allProducts: ProductType[];
 };

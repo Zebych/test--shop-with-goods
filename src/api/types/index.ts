@@ -1,4 +1,4 @@
-export type ProductObjType = {
+export type ProductType = {
   name: string;
   photo: string;
   id: number;
@@ -7,13 +7,13 @@ export type ProductObjType = {
   inStock?: number;
 };
 
-export type ResDatatype = {
+export type InitGoodsStateType = {
   result: string;
-  data: ProductObjType[];
-  imgArr: ImgObjType[];
+  data: ProductType[];
+  images: MugPhotoType[];
 };
 
-export type ImgObjType = {
+export type MugPhotoType = {
   id: number;
   photo: string;
 };

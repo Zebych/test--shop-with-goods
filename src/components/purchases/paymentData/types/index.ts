@@ -1,4 +1,4 @@
-export type FormikErrorType = {
+export type FormikValuesType = {
   firstLastName?: string;
   cardNumber?: string;
   expirationDate?: string;

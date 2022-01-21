@@ -3,21 +3,16 @@ import React, { FC, memo, ReactElement } from 'react';
 import { Product } from './Product';
 import { ProductContainerPropsType, ReturnBuyProductButtonType } from './types';
 
-import {
-  addProductInCart,
-  setCart,
-  getCartContents,
-  getRawDataOfGoods,
-  useAppDispatch,
-  useAppSelector,
-} from 'store';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { addProductInCart, setCart } from 'store/reducers';
+import { selectCartContents, selectGoodsData } from 'store/selectors';
 
 export const ProductContainer: FC<ProductContainerPropsType> = memo(
   ({ photo, id, name, price }): ReactElement => {
     const dispatch = useAppDispatch();
 
-    const cartContents = useAppSelector(getCartContents);
-    const rawDataOfGoods = useAppSelector(getRawDataOfGoods);
+    const cartContents = useAppSelector(selectCartContents);
+    const rawDataOfGoods = useAppSelector(selectGoodsData);
 
     const handleBuyProductButton = (): ReturnBuyProductButtonType => {
       const hasPurchase = cartContents.some(product => product.id === id);

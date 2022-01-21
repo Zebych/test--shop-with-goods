@@ -35,8 +35,8 @@ test('add object to shopping array', () => {
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.cartContents.length).toEqual(3);
-  expect(endState.cartContents[2].id).toEqual(2);
+  expect(endState.cartProducts.length).toEqual(3);
+  expect(endState.cartProducts[2].id).toEqual(2);
 });
 
 test('remove object to shopping array', () => {
@@ -44,8 +44,8 @@ test('remove object to shopping array', () => {
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.cartContents.length).toEqual(1);
-  expect(endState.cartContents[0].id).toEqual(7);
+  expect(endState.cartProducts.length).toEqual(1);
+  expect(endState.cartProducts[0].id).toEqual(7);
 });
 
 test('calculate the amount of purchases', () => {
@@ -61,8 +61,8 @@ test('subtract quantity from shopping list', () => {
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.cartContents[0].toPurchase).toEqual(1);
-  expect(endState.cartContents[0].price).toEqual(50);
+  expect(endState.cartProducts[0].toPurchase).toEqual(1);
+  expect(endState.cartProducts[0].price).toEqual(50);
 });
 
 test('add quantity from shopping list', () => {
@@ -70,8 +70,8 @@ test('add quantity from shopping list', () => {
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.cartContents[0].toPurchase).toEqual(3);
-  expect(endState.cartContents[0].price).toEqual(150);
+  expect(endState.cartProducts[0].toPurchase).toEqual(3);
+  expect(endState.cartProducts[0].price).toEqual(150);
 });
 
 test('make a purchase', () => {
@@ -93,6 +93,6 @@ test('make a purchase', () => {
 
   const endState = cartReducer(startState, action);
 
-  expect(endState.cartContents.length).toBe(0);
+  expect(endState.cartProducts.length).toBe(0);
   expect(endState.sumPrice).toBe(0);
 });

@@ -7,5 +7,4 @@ export { addProductInCart } from './cart-reducer';
 export { deleteCart } from './cart-reducer';
 export { buyTC } from './cart-reducer';
 export { conditionBuy } from './cart-reducer';
-export type { InitCartType } from './cart-reducer';
 export type { RequestStatusType } from './app-reducer';

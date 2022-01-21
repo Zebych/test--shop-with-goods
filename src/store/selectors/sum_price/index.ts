@@ -1,0 +1,1 @@
+export { selectSumPrice } from './sumPrice';
