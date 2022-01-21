@@ -5,20 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { Cart } from './Cart';
 import { useCartMediaHook } from './cartHooks';
 
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { NavigatePath } from 'routes';
-import {
-  getDataIsPurchaseMade,
-  useAppDispatch,
-  useAppSelector,
-  conditionBuy,
-} from 'store';
+import { conditionBuy } from 'store/reducers';
+import { selectDataIsPurchaseMade } from 'store/selectors';
 
 export const CartContainer = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  const isPurchaseMade = useAppSelector(getDataIsPurchaseMade);
+  const isPurchaseMade = useAppSelector(selectDataIsPurchaseMade);
 
   const { matches } = useCartMediaHook();
   const mediaStyle = matches ? { display: 'flex' } : { display: 'block' };

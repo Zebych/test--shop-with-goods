@@ -1,0 +1,1 @@
+export { selectGoodsData } from './goodsData';

@@ -1,4 +1,4 @@
-import { ProductObjType } from 'api';
+import { ProductType } from 'api';
 
 export type ProductContainerPropsType = {
   id: number;
@@ -9,7 +9,7 @@ export type ProductContainerPropsType = {
 export type ReturnBuyProductButtonType =
   | undefined
   | { payload: { id: number } }
-  | { payload: { addProduct: ProductObjType } };
+  | { payload: { addProduct: ProductType } };
 
 export type ProductPropsType = {
   name: string;

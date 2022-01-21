@@ -1,2 +1,2 @@
 export { PaymentForm } from './PaymentForm';
-export type { FormikErrorType } from './types';
+export type { FormikValuesType } from './types';

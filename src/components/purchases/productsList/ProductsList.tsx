@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 import { ProductsListPropsType } from './types';
 
-import { IsInCart } from 'enum';
+import { CartStatus } from 'enum';
 
 export const ProductsList: FC<ProductsListPropsType> = memo(
   ({
@@ -43,7 +43,7 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
           <p>{price}</p>
         </div>
         <div style={{ display: 'flex' }}>
-          {toPurchase > IsInCart.OneUnit ? (
+          {toPurchase > CartStatus.OneUnit ? (
             <Button
               variant="contained"
               color="primary"

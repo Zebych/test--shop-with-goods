@@ -2,10 +2,11 @@ import React, { ReactElement } from 'react';
 
 import { Header } from './Header';
 
-import { getSumPrice, useAppSelector } from 'store';
+import { useAppSelector } from 'hooks';
+import { selectSumPrice } from 'store/selectors';
 
 export const HeaderContainer = (): ReactElement => {
-  const sumPrice = useAppSelector(getSumPrice);
+  const sumPrice = useAppSelector(selectSumPrice);
 
   return <Header sumPrice={sumPrice} />;
 };

@@ -2,21 +2,25 @@ import React, { ReactElement, useEffect } from 'react';
 
 import { AppBar, LinearProgress, Toolbar } from '@material-ui/core';
 
-import { ProductObjType } from 'api';
+import { PreloaderStatus } from './enum';
+
+import { ProductType } from 'api';
 import { HeaderContainer } from 'components';
-import { getLocalData, keyToLocalStorage } from 'localStorage';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { getLocalData, LocalStorageKey } from 'localStorage';
 import { NavigateRoute } from 'routes';
-import { goodsAllTC, getAppStatus, setCart, useAppDispatch, useAppSelector } from 'store';
+import { goodsAllTC, setCart } from 'store/reducers';
+import { selectAppStatus } from 'store/selectors';
 
 export const App = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const status = useAppSelector(getAppStatus);
+  const status = useAppSelector(selectAppStatus);
 
   useEffect(() => {
-    getLocalData(keyToLocalStorage.productsPlannedForPurchase).map(
-      (readyToBuyProduct: ProductObjType) =>
-        dispatch(setCart({ addProduct: readyToBuyProduct })),
+    const localStorageData = getLocalData(LocalStorageKey.ProductsPlannedForPurchase);
+    localStorageData.map((readyToBuyProduct: ProductType) =>
+      dispatch(setCart({ addProduct: readyToBuyProduct })),
     );
     dispatch(goodsAllTC());
   }, []);
@@ -27,8 +31,10 @@ export const App = (): ReactElement => {
         <Toolbar style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <HeaderContainer />
         </Toolbar>
-        {status === 'loading' && <LinearProgress />}
+
+        {status === PreloaderStatus.Loading && <LinearProgress />}
       </AppBar>
+
       <NavigateRoute />
     </div>
   );

@@ -2,37 +2,38 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { setAppStatus } from '../app-reducer/app-reducer';
+import { setAppStatus } from '../app-reducer';
 
-import { ACC_START_VALUE } from './constants';
+import { ACC_START_VALUE, CART } from './constants';
 import { InitCartType } from './types';
 
-import { apiRequests, ProductObjType } from 'api';
-import { FormikErrorType } from 'components';
-import { keyToLocalStorage, saveCartContentsLocally } from 'localStorage';
+import { API, ProductType } from 'api';
+import { FormikValuesType } from 'components';
+import { PreloaderStatus } from 'enum';
+import { LocalStorageKey, saveCartContentsLocally } from 'localStorage';
 
 const initCartState: InitCartType = {
   sumPrice: 0,
   cartContents: [],
   isPurchaseMade: false,
 };
-const keyToLocalData = keyToLocalStorage.productsPlannedForPurchase;
+const keyToLocalData = LocalStorageKey.ProductsPlannedForPurchase;
 
 export const buyTC = createAsyncThunk(
   'shoppingCart/buy',
-  async (param: { addedCart: ProductObjType[]; values: FormikErrorType }, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({ status: 'loading' }));
-    const { data } = await apiRequests.setPostPurchases(param.addedCart, param.values);
-    thunkAPI.dispatch(setAppStatus({ status: 'succeeded' }));
+  async (param: { addedCart: ProductType[]; values: FormikValuesType }, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({ status: PreloaderStatus.Loading }));
+    const { data } = await API.setPostPurchases(param.addedCart, param.values);
+    thunkAPI.dispatch(setAppStatus({ status: PreloaderStatus.Succeeded }));
     return { data };
   },
 );
 
 const slice = createSlice({
-  name: 'cart',
+  name: CART,
   initialState: initCartState,
   reducers: {
-    setCart(state, action: PayloadAction<{ addProduct: ProductObjType }>) {
+    setCart(state, action: PayloadAction<{ addProduct: ProductType }>) {
       const apAddProduct = action.payload.addProduct;
       state.cartContents = [...state.cartContents, apAddProduct];
       state.sumPrice = state.cartContents.reduce(

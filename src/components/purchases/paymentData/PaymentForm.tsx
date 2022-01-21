@@ -12,14 +12,16 @@ import {
 import { useFormik } from 'formik';
 
 import { CARD_NUMBER_LENGTH, EXPIRATION_DATE_LENGTH } from './constants';
-import { FormikErrorType, PaymentFormPropsType } from './types';
+import { FormikValuesType, PaymentFormPropsType } from './types';
 
-import { buyTC, getCartContents, useAppDispatch, useAppSelector } from 'store';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { buyTC } from 'store/reducers';
+import { selectCartContents } from 'store/selectors';
 
 export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
   const dispatch = useAppDispatch();
 
-  const addedCart = useAppSelector(getCartContents);
+  const addedCart = useAppSelector(selectCartContents);
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +32,7 @@ export const PaymentForm: FC<PaymentFormPropsType> = memo(({ mediaStyle }) => {
       rememberMe: false,
     },
     validate: values => {
-      const errors: FormikErrorType = {};
+      const errors: FormikValuesType = {};
 
       if (!values.cardNumber) {
         errors.cardNumber = 'Required';

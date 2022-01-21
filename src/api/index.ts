@@ -1,4 +1,4 @@
-export { apiRequests } from './apiRequests';
+export { API } from './api';
 
-export type { ResDatatype } from './types';
-export type { ProductObjType } from './types';
+export type { InitGoodsStateType } from './types';
+export type { ProductType } from './types';

@@ -1,1 +1,1 @@
-export { keyToLocalStorage } from './localStorageEnums';
+export { LocalStorageKey } from './localStorageEnums';
