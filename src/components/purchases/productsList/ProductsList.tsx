@@ -18,12 +18,12 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
     onAddItemToCart,
   }): ReactElement => {
     const onRemoveProductInCartClick = useCallback((): void => {
-      onRemoveProductInCart(id);
-    }, [id]);
-
-    const onDeleteProductFromCartClick = useCallback((): void => {
-      onDeleteProductFromCart(id);
-    }, [id]);
+      if (toPurchase > CartStatus.OneUnit) {
+        onRemoveProductInCart(id);
+      } else {
+        onDeleteProductFromCart(id);
+      }
+    }, [toPurchase]);
 
     const onAddItemToCartClick = useCallback((): void => {
       onAddItemToCart(id);
@@ -43,23 +43,13 @@ export const ProductsList: FC<ProductsListPropsType> = memo(
           <p>{price}</p>
         </div>
         <div style={{ display: 'flex' }}>
-          {toPurchase > CartStatus.OneUnit ? (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onRemoveProductInCartClick}
-            >
-              -
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onDeleteProductFromCartClick}
-            >
-              -
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={onRemoveProductInCartClick}
+          >
+            -
+          </Button>
           <div style={{ padding: '10px' }}>{toPurchase}</div>
           <Button variant="contained" color="primary" onClick={onAddItemToCartClick}>
             +
